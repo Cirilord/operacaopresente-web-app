@@ -1,4 +1,5 @@
 'use client'
+import questions from '@/data/questions.json'
 import {
     Accordion,
     AccordionButton,
@@ -25,11 +26,21 @@ import {
     Text,
     VStack
 } from '@chakra-ui/react'
+// import { Select } from 'chakra-react-select'
 import Image from 'next/image'
-import questions from '@/data/questions.json'
-import { Select } from 'chakra-react-select'
+import { useForm } from 'react-hook-form'
+import { generatePdf } from './actions'
 
 export default function HomePage() {
+
+    const formMethods = useForm({ defaultValues: { answers: [] as { data: string }[] } })
+
+    const onSubmit = formMethods.handleSubmit(async values => {
+
+        const response = await generatePdf(values)
+
+        console.log(response)
+    })
 
     return (
         <VStack backgroundColor='#471ca8'>
@@ -95,7 +106,15 @@ export default function HomePage() {
                     <Text color='#ffffff' marginBottom='50px'>
                         Responda as perguntas de acordo com a pessoa que irá receber o presente. Seja bem detalhado e nos conte tudo o que souber.
                     </Text>
-                    <Tabs backgroundColor='#ffffff' borderRadius='15px' boxShadow='lg' isFitted={true} variant='unstyled' width='550px'>
+                    <Tabs
+                        as='form'
+                        backgroundColor='#ffffff'
+                        borderRadius='15px'
+                        boxShadow='lg'
+                        isFitted={true}
+                        variant='unstyled'
+                        width='550px'
+                        onSubmit={onSubmit}>
                         <TabList
                             _before={{
                                 backgroundColor: '#ffffff',
@@ -127,18 +146,21 @@ export default function HomePage() {
                             <TabPanel padding={6} paddingBottom={0}>
                                 <Stack>
                                     {
-                                        questions.simple.map(({ id, name, hint, options, placeholder, type }) => (
+                                        questions.simple.map(({ id, name, hint, options, placeholder, type }, index) => (
                                             <FormControl key={id}>
                                                 <FormLabel marginBottom={1}>{name}</FormLabel>
                                                 <FormHelperText fontSize='smaller' marginTop={1}>{hint}</FormHelperText>
                                                 {
                                                     type === 'input' &&
-                                                    <Input placeholder={placeholder} />
+                                                    <Input
+                                                        placeholder={placeholder}
+                                                        {...formMethods.register(`answers.${index}.data`)}
+                                                    />
                                                 }
-                                                {
+                                                {/* {
                                                     type === 'select' &&
                                                     <Select options={options} placeholder={placeholder} useBasicStyles={true} />
-                                                }
+                                                } */}
                                             </FormControl>
                                         ))
                                     }
@@ -147,18 +169,21 @@ export default function HomePage() {
                             <TabPanel padding={6} paddingBottom={0}>
                                 <Stack>
                                     {
-                                        questions.advanced.map(({ id, name, hint, options, placeholder, type }) => (
+                                        questions.advanced.map(({ id, name, hint, options, placeholder, type }, index) => (
                                             <FormControl key={id}>
                                                 <FormLabel marginBottom={1}>{name}</FormLabel>
                                                 <FormHelperText fontSize='smaller' marginTop={1}>{hint}</FormHelperText>
                                                 {
                                                     type === 'input' &&
-                                                    <Input placeholder={placeholder} />
+                                                    <Input
+                                                        placeholder={placeholder}
+                                                        {...formMethods.register(`answers.${index}.data`)}
+                                                    />
                                                 }
-                                                {
+                                                {/* {
                                                     type === 'select' &&
                                                     <Select options={options} placeholder={placeholder} useBasicStyles={true} />
-                                                }
+                                                } */}
                                             </FormControl>
                                         ))
                                     }
@@ -170,7 +195,8 @@ export default function HomePage() {
                                 _hover={{}}
                                 backgroundColor='#D1105A'
                                 color='#ffffff'
-                                margin='auto'>
+                                margin='auto'
+                                type='submit'>
                                 Buscar presentes
                             </Button>
                         </Center>
@@ -198,7 +224,9 @@ export default function HomePage() {
                                     </AccordionButton>
                                 </h2>
                                 <AccordionPanel pb={4}>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, quidem autem voluptatum optio molestiae repellat veniam dolor dolorem iste recusandae aperiam exercitationem dolores, sit enim iusto quis, incidunt amet cum.
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, quidem autem
+                                    voluptatum optio molestiae repellat veniam dolor dolorem iste recusandae
+                                    aperiam exercitationem dolores, sit enim iusto quis, incidunt amet cum.
                                 </AccordionPanel>
                             </AccordionItem>
                             <AccordionItem>
@@ -211,7 +239,9 @@ export default function HomePage() {
                                     </AccordionButton>
                                 </h2>
                                 <AccordionPanel pb={4}>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ullam non ut deleniti reprehenderit mollitia temporibus harum doloribus delectus repudiandae! Amet reiciendis non illo ad! Dignissimos dolor numquam quis ipsum!
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ullam
+                                    non ut deleniti reprehenderit mollitia temporibus harum doloribus delectus
+                                    repudiandae! Amet reiciendis non illo ad! Dignissimos dolor numquam quis ipsum!
                                 </AccordionPanel>
                             </AccordionItem>
                         </Accordion>
