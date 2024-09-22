@@ -1,162 +1,306 @@
 {
-    "simple": [
+    "advanced": [
         {
+            "hint": "",
             "id": "1",
-            "name": "Qual o hobby principal dessa pessoa? ",
-            "hint": "",
-            "placeholder": "",
+            "label": "Qual o hobby principal dessa pessoa?",
             "options": [],
+            "placeholder": "",
             "type": "input"
         },
         {
+            "hint": "",
             "id": "2",
-            "name": "Qual é o estilo dela?",
-            "hint": "Moderno, clássico, romântico, etc...",
-            "placeholder": "",
+            "label": "Quais filmes ela assiste?",
             "options": [],
+            "placeholder": "",
             "type": "input"
         },
         {
+            "hint": "",
             "id": "3",
-            "name": "Qual a faixa etária?",
-            "hint": "",
-            "placeholder": "",
+            "label": "Qual o estilo musical ela mais gosta?",
             "options": [],
+            "placeholder": "",
             "type": "input"
         },
         {
+            "hint": "Exemplo: coleciona itens específicos",
             "id": "4",
-            "name": "Qual é a ocasião para o presente?",
-            "hint": "",
-            "placeholder": "",
+            "label": "Quais manias essa pessoa tem?",
             "options": [],
+            "placeholder": "",
             "type": "input"
         },
         {
+            "hint": "Moderno, clássico, romântico, etc...",
             "id": "5",
-            "name": "O que essa pessoa é sua?",
-            "hint": "",
-            "placeholder": "Escolha uma opção",
-            "options": [
-                { "label": "Amigo", "value": "Amigo" },
-                { "label": "Namorado", "value": "Namorado" },
-                { "label": "Parente", "value": "Parente" }
-            ],
-            "type": "select"
-        },
-        {
-            "id": "6",
-            "name": "O que essa pessoa valoriza mais?",
-            "hint": "Experiências, objetos, personalização, etc...",
-            "placeholder": "",
+            "label": "Qual é o estilo pessoal?",
             "options": [],
+            "placeholder": "",
             "type": "input"
         },
         {
-            "id": "7",
-            "name": "Qual é o seu orçamento para esse presente?",
             "hint": "",
-            "placeholder": "",
+            "id": "6",
+            "label": "Qual a cor favorita?",
             "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "Amigo, namorado, parente, etc...",
+            "id": "7",
+            "label": "O que essa pessoa é sua?",
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "",
+            "id": "8",
+            "label": "Ela mencionou recentemente algo que precisava?",
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "",
+            "id": "9",
+            "label": "Qual a faixa etária dela?",
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "Aniversário, Aniversário de namoro, Natal, etc...",
+            "id": "10",
+            "label": "Qual é a ocasião para o presente?",
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "experiências, objetivos, personalização, etc...",
+            "id": "11",
+            "label": "O que essa pessoa valoriza mais?",
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "",
+            "id": "12",
+            "label": "Qual é o seu orçamento para esse presente?",
+            "options": [],
+            "placeholder": "",
             "type": "input"
         }
     ],
-    "advanced": [
+    "simple": [
         {
+            "hint": "",
             "id": "1",
-            "name": "Qual o hobby principal dessa pessoa?",
-            "hint": "",
-            "placeholder": "",
+            "label": "Qual o hobby principal dessa pessoa? ",
             "options": [],
+            "placeholder": "",
             "type": "input"
         },
         {
-            "id": "2",
-            "name": "Quais filmes ela assiste?",
-            "hint": "",
-            "placeholder": "",
-            "options": [],
-            "type": "input"
-        },
-        {
-            "id": "3",
-            "name": "Qual o estilo musical ela mais gosta?",
-            "hint": "",
-            "placeholder": "",
-            "options": [],
-            "type": "input"
-        },
-        {
-            "id": "4",
-            "name": "Quais manias essa pessoa tem?",
-            "hint": "Exemplo: coleciona itens específicos",
-            "placeholder": "",
-            "options": [],
-            "type": "input"
-        },
-        {
-            "id": "5",
-            "name": "Qual é o estilo pessoal?",
             "hint": "Moderno, clássico, romântico, etc...",
-            "placeholder": "",
+            "id": "2",
+            "label": "Qual é o estilo dela?",
             "options": [],
+            "placeholder": "",
             "type": "input"
         },
         {
+            "hint": "",
+            "id": "3",
+            "label": "Qual a faixa etária?",
+            "options": [
+                {
+                    "label": "0-5 anos",
+                    "value": "0-5 anos"
+                },
+                {
+                    "label": "6-12 anos",
+                    "value": "6-12 anos"
+                },
+                {
+                    "label": "13-17 anos",
+                    "value": "13-17 anos"
+                },
+                {
+                    "label": "18-24 anos",
+                    "value": "18-24 anos"
+                },
+                {
+                    "label": "25-30 anos",
+                    "value": "25-30 anos"
+                },
+                {
+                    "label": "31-40 anos",
+                    "value": "31-40 anos"
+                },
+                {
+                    "label": "41-50 anos",
+                    "value": "41-50 anos"
+                },
+                {
+                    "label": "51-60 anos",
+                    "value": "51-60 anos"
+                },
+                {
+                    "label": "61 anos ou mais",
+                    "value": "61 anos ou mais"
+                }
+            ],
+            "placeholder": "Escolha uma opção",
+            "type": "select"
+        },
+        {
+            "hint": "",
+            "id": "4",
+            "label": "Qual é a ocasião para o presente?",
+            "options": [
+                {
+                    "value": "Aniversário",
+                    "label": "Aniversário"
+                },
+                {
+                    "value": "Natal",
+                    "label": "Natal"
+                },
+                {
+                    "value": "Dia das Mães",
+                    "label": "Dia das Mães"
+                },
+                {
+                    "value": "Dia dos Pais",
+                    "label": "Dia dos Pais"
+                },
+                {
+                    "value": "Dia dos Namorados",
+                    "label": "Dia dos Namorados"
+                },
+                {
+                    "value": "Casamento",
+                    "label": "Casamento"
+                },
+                {
+                    "value": "Chá de Bebê",
+                    "label": "Chá de Bebê"
+                },
+                {
+                    "value": "Formatura",
+                    "label": "Formatura"
+                },
+                {
+                    "value": "Agradecimento",
+                    "label": "Agradecimento"
+                },
+                {
+                    "value": "Promoção no Trabalho",
+                    "label": "Promoção no Trabalho"
+                },
+                {
+                    "value": "Retorno de Viagem",
+                    "label": "Retorno de Viagem"
+                },
+                {
+                    "value": "Dia de Ação de Graças",
+                    "label": "Dia de Ação de Graças"
+                },
+                {
+                    "value": "Festa de Aniversário de Casamento",
+                    "label": "Festa de Aniversário de Casamento"
+                },
+                {
+                    "value": "Eventos Esportivos",
+                    "label": "Eventos Esportivos"
+                },
+                {
+                    "value": "Festas Temáticas",
+                    "label": "Festas Temáticas"
+                },
+                {
+                    "value": "Dia da Amizade",
+                    "label": "Dia da Amizade"
+                },
+                {
+                    "value": "Início de um Novo Emprego",
+                    "label": "Início de um Novo Emprego"
+                },
+                {
+                    "value": "Presentes de Conforto",
+                    "label": "Presentes de Conforto"
+                }
+            ],
+            "placeholder": "Escolha uma opção",
+            "type": "select"
+        },
+        {
+            "hint": "",
+            "id": "5",
+            "label": "O que essa pessoa é sua?",
+            "options": [
+                {
+                    "label": "Amigo",
+                    "value": "Amigo"
+                },
+                {
+                    "label": "Namorado",
+                    "value": "Namorado"
+                },
+                {
+                    "label": "Parente",
+                    "value": "Parente"
+                },
+                {
+                    "label": "Conhecido",
+                    "value": "Conhecido"
+                }
+            ],
+            "placeholder": "Escolha uma opção",
+            "type": "select"
+        },
+        {
+            "hint": "Experiências, objetos, personalização, etc...",
             "id": "6",
-            "name": "Qual a cor favorita?",
-            "hint": "",
-            "placeholder": "",
+            "label": "O que essa pessoa valoriza mais?",
             "options": [],
+            "placeholder": "",
             "type": "input"
         },
         {
+            "hint": "",
             "id": "7",
-            "name": "O que essa pessoa é sua?",
-            "hint": "Amigo, namorado, parente, etc...",
-            "placeholder": "",
-            "options": [],
-            "type": "input"
-        },
-        {
-            "id": "8",
-            "name": "Ela mencionou recentemente algo que precisava?",
-            "hint": "",
-            "placeholder": "",
-            "options": [],
-            "type": "input"
-        },
-        {
-            "id": "9",
-            "name": "Qual a faixa etária dela?",
-            "hint": "",
-            "placeholder": "",
-            "options": [],
-            "type": "input"
-        },
-        {
-            "id": "10",
-            "name": "Qual é a ocasião para o presente?",
-            "hint": "Aniversário, Aniversário de namoro, Natal, etc...",
-            "placeholder": "",
-            "options": [],
-            "type": "input"
-        },
-        {
-            "id": "11",
-            "name": "O que essa pessoa valoriza mais?",
-            "hint": "experiências, objetivos, personalização, etc...",
-            "placeholder": "",
-            "options": [],
-            "type": "input"
-        },
-        {
-            "id": "12",
-            "name": "Qual é o seu orçamento para esse presente?",
-            "hint": "",
-            "placeholder": "",
-            "options": [],
-            "type": "input"
+            "label": "Qual é o seu orçamento para esse presente?",
+            "options": [
+                {
+                    "label": "Até R$50",
+                    "value": "Até R$50"
+                },
+                {
+                    "label": "R$51 - R$100",
+                    "value": "R$51 - R$100"
+                },
+                {
+                    "label": "R$101 - R$200",
+                    "value": "R$101 - R$200"
+                },
+                {
+                    "label": "R$201 - R$300",
+                    "value": "R$201 - R$300"
+                },
+                {
+                    "label": "Acima de R$300",
+                    "value": "Acima de R$300"
+                }
+            ],
+            "placeholder": "Escolha uma opção",
+            "type": "select"
         }
     ]
 }

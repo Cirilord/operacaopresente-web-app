@@ -1,4 +1,5 @@
 'use client'
+import faq from '@/data/faq.json'
 import questions from '@/data/questions.json'
 import {
     Accordion,
@@ -16,6 +17,7 @@ import {
     Grid,
     GridItem,
     HStack,
+    Icon,
     Input,
     Stack,
     Tab,
@@ -26,20 +28,38 @@ import {
     Text,
     VStack
 } from '@chakra-ui/react'
-// import { Select } from 'chakra-react-select'
+import { Select } from 'chakra-react-select'
+import { saveAs } from 'file-saver'
 import Image from 'next/image'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
+import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react-icons/tb'
 import { generatePdf } from './actions'
 
 export default function HomePage() {
 
-    const formMethods = useForm({ defaultValues: { answers: [] as { data: string }[] } })
+    const formMethods = useForm({ defaultValues: { responses: [] as { answer: string, question: string }[] } })
 
     const onSubmit = formMethods.handleSubmit(async values => {
+        try {
 
-        const response = await generatePdf(values)
+            const response = await generatePdf(values.responses)
 
-        console.log(response)
+            console.log(response)
+
+            debugger
+
+            if (response.success) {
+
+                const uint8Array = new Uint8Array(response.data.output)
+                    , blob = new Blob([uint8Array], { type: 'application/pdf' })
+
+                saveAs(blob, 'test.pdf')
+            }
+        }
+        catch (error) {
+
+            console.log(error)
+        }
     })
 
     return (
@@ -55,12 +75,14 @@ export default function HomePage() {
                             Operação presente
                         </Text>
                         <Text color='#ffffff'>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas possimus
-                            deleniti commodi aliquid hic quo, reiciendis tenetur numquam vel delectus
-                            minima iure consequatur adipisci, odio deserunt. Aspernatur quis similique nesciunt.
+                            Surpreenda a pessoa amada com um presente certeiro, de acordo com os gostos dela. Não tem como dar errado!
                         </Text>
-                        <Button margin='20px auto 0'>
-                            Test
+                        <Button
+                            _hover={{}}
+                            backgroundColor='#D1105A'
+                            color='#ffffff'
+                            margin='20px auto 0'>
+                            Buscar presentes
                         </Button>
                     </VStack>
                     <Image alt='Imagem principal' src='https://placehold.jp/300x400.png' height={400} width={300} />
@@ -74,21 +96,55 @@ export default function HomePage() {
                             color='#ffffff'
                             fontSize='xxx-large'
                             fontWeight='700'>
-                            Título do problema
+                            Como acertar no presente?
                         </Text>
                         <Text color='#ffffff'>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas possimus
-                            deleniti commodi aliquid hic quo, reiciendis tenetur numquam vel delectus
-                            minima iure consequatur adipisci, odio deserunt. Aspernatur quis similique nesciunt.
+                            Já passou por aquele momento em que você precisa escolher um presente para quem ama e não sabe o que dar?
+                            Mesmo conhecendo/sabendo tudo (ou muitas coisas) sobre aquela pessoa, é difícil acertar e surpreender.
+                            Então chegou o momento de você acertar no presente! No Operação Presente, você irá responder algumas
+                            perguntas e pronto, um dossiê completo com ideias e sugestões de presentes com base naquilo que a
+                            pessoa gosta. Chega de errar nos presente!
                         </Text>
                         <Grid gap={6} templateColumns='repeat(4, 1fr)' width='100%'>
-                            <GridItem backgroundColor='#000000' borderRadius='10px' height='250px' width='100%' />
-                            <GridItem backgroundColor='#000000' borderRadius='10px' height='250px' width='100%' />
-                            <GridItem backgroundColor='#000000' borderRadius='10px' height='250px' width='100%' />
-                            <GridItem backgroundColor='#000000' borderRadius='10px' height='250px' width='100%' />
+                            <GridItem border='1px solid #ffffff' borderRadius='15px' height='250px' padding={4} width='100%'>
+                                <Center flexDirection='column' height='100%'>
+                                    <Text color='#ffffff' height='80px' textAlign='center'>
+                                        Responda as perguntas
+                                    </Text>
+                                    <Icon as={TbFileDescription} color='#ffffff' fontSize='35px' />
+                                </Center>
+                            </GridItem>
+                            <GridItem border='1px solid #ffffff' borderRadius='15px' height='250px' padding={4} width='100%'>
+                                <Center flexDirection='column' height='100%'>
+                                    <Text color='#ffffff' height='80px' textAlign='center'>
+                                        Escolha um método de pagamento e realize o checkout
+                                    </Text>
+                                    <Icon as={TbPigMoney} color='#ffffff' fontSize='35px' />
+                                    {/* <Icon as={TbCurrencyDollar} /> */}
+                                </Center>
+                            </GridItem>
+                            <GridItem border='1px solid #ffffff' borderRadius='15px' height='250px' padding={4} width='100%'>
+                                <Center flexDirection='column' height='100%'>
+                                    <Text color='#ffffff' height='80px' textAlign='center'>
+                                        Você receberá o dossiê com todas as dicas e ideias de presentes via e-mail
+                                    </Text>
+                                    <Icon as={TbChecklist} color='#ffffff' fontSize='35px' />
+                                </Center>
+                            </GridItem>
+                            <GridItem border='1px solid #ffffff' borderRadius='15px' height='250px' padding={4} width='100%'>
+                                <Center flexDirection='column' height='100%'>
+                                    <Text color='#ffffff' height='80px' textAlign='center'>
+                                        Surpreenda quem você ama
+                                    </Text>
+                                    <Icon as={TbHeartFilled} color='#ffffff' fontSize='35px' />
+                                </Center>
+                            </GridItem>
                         </Grid>
-                        <Button>
-                            Test
+                        <Button
+                            _hover={{}}
+                            backgroundColor='#D1105A'
+                            color='#ffffff'>
+                            Buscar presentes
                         </Button>
                     </Stack>
                 </Container>
@@ -112,6 +168,7 @@ export default function HomePage() {
                         borderRadius='15px'
                         boxShadow='lg'
                         isFitted={true}
+                        isLazy={true}
                         variant='unstyled'
                         width='550px'
                         onSubmit={onSubmit}>
@@ -136,7 +193,7 @@ export default function HomePage() {
                                     Simples
                                 </Text>
                             </Tab>
-                            <Tab padding={4}>
+                            <Tab isDisabled={true} padding={4}>
                                 <Text as='span' fontWeight='600'>
                                     Avançado
                                 </Text>
@@ -146,55 +203,71 @@ export default function HomePage() {
                             <TabPanel padding={6} paddingBottom={0}>
                                 <Stack>
                                     {
-                                        questions.simple.map(({ id, name, hint, options, placeholder, type }, index) => (
+                                        questions.simple.map(({ hint, id, label, options, placeholder, type }, index) => (
                                             <FormControl key={id}>
-                                                <FormLabel marginBottom={1}>{name}</FormLabel>
+                                                <FormLabel marginBottom={1}>{label}</FormLabel>
                                                 <FormHelperText fontSize='smaller' marginTop={1}>{hint}</FormHelperText>
+                                                <Input type='hidden' {...formMethods.register(`responses.${index}.question`, { value: label })} />
                                                 {
                                                     type === 'input' &&
                                                     <Input
                                                         placeholder={placeholder}
-                                                        {...formMethods.register(`answers.${index}.data`)}
+                                                        {...formMethods.register(`responses.${index}.answer`)}
                                                     />
                                                 }
-                                                {/* {
+                                                {
                                                     type === 'select' &&
-                                                    <Select options={options} placeholder={placeholder} useBasicStyles={true} />
-                                                } */}
+                                                    <Controller
+                                                        control={formMethods.control}
+                                                        name={`responses.${index}.answer`}
+                                                        render={({ field }) => (
+                                                            <Select
+                                                                options={options}
+                                                                placeholder={placeholder}
+                                                                useBasicStyles={true}
+                                                                {...field}
+                                                                value={options.find(c => c.value === field.value)}
+                                                                onChange={val => field.onChange(val?.value)}
+                                                            />
+                                                        )}
+                                                    />
+                                                }
                                             </FormControl>
                                         ))
                                     }
                                 </Stack>
                             </TabPanel>
-                            <TabPanel padding={6} paddingBottom={0}>
+                            {/* <TabPanel padding={6} paddingBottom={0}>
                                 <Stack>
                                     {
-                                        questions.advanced.map(({ id, name, hint, options, placeholder, type }, index) => (
+                                        questions.advanced.map(({ hint, id, label, options, placeholder, type }, index) => (
                                             <FormControl key={id}>
-                                                <FormLabel marginBottom={1}>{name}</FormLabel>
+                                                <FormLabel marginBottom={1}>{label}</FormLabel>
                                                 <FormHelperText fontSize='smaller' marginTop={1}>{hint}</FormHelperText>
+                                                <Input type='hidden' {...formMethods.register(`responses.${index}.question`, { value: label })} />
                                                 {
                                                     type === 'input' &&
                                                     <Input
                                                         placeholder={placeholder}
-                                                        {...formMethods.register(`answers.${index}.data`)}
+                                                        {...formMethods.register(`responses.${index}.answer`)}
                                                     />
                                                 }
-                                                {/* {
+                                                {
                                                     type === 'select' &&
                                                     <Select options={options} placeholder={placeholder} useBasicStyles={true} />
-                                                } */}
+                                                }
                                             </FormControl>
                                         ))
                                     }
                                 </Stack>
-                            </TabPanel>
+                            </TabPanel> */}
                         </TabPanels>
                         <Center margin='20px 0'>
                             <Button
                                 _hover={{}}
                                 backgroundColor='#D1105A'
                                 color='#ffffff'
+                                isLoading={formMethods.formState.isSubmitting}
                                 margin='auto'
                                 type='submit'>
                                 Buscar presentes
@@ -214,36 +287,23 @@ export default function HomePage() {
                             FAQ
                         </Text>
                         <Accordion allowToggle={true} width='700px'>
-                            <AccordionItem>
-                                <h2>
-                                    <AccordionButton>
-                                        <Box as='span' flex='1' textAlign='left'>
-                                            Pergunta
-                                        </Box>
-                                        <AccordionIcon />
-                                    </AccordionButton>
-                                </h2>
-                                <AccordionPanel pb={4}>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, quidem autem
-                                    voluptatum optio molestiae repellat veniam dolor dolorem iste recusandae
-                                    aperiam exercitationem dolores, sit enim iusto quis, incidunt amet cum.
-                                </AccordionPanel>
-                            </AccordionItem>
-                            <AccordionItem>
-                                <h2>
-                                    <AccordionButton>
-                                        <Box as='span' flex='1' textAlign='left'>
-                                            Pergunta
-                                        </Box>
-                                        <AccordionIcon />
-                                    </AccordionButton>
-                                </h2>
-                                <AccordionPanel pb={4}>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ullam
-                                    non ut deleniti reprehenderit mollitia temporibus harum doloribus delectus
-                                    repudiandae! Amet reiciendis non illo ad! Dignissimos dolor numquam quis ipsum!
-                                </AccordionPanel>
-                            </AccordionItem>
+                            {
+                                faq.map(({ answer, question }) => (
+                                    <AccordionItem key={question}>
+                                        <h2>
+                                            <AccordionButton>
+                                                <Box as='span' flex='1' textAlign='left'>
+                                                    {question}
+                                                </Box>
+                                                <AccordionIcon />
+                                            </AccordionButton>
+                                        </h2>
+                                        <AccordionPanel pb={4}>
+                                            {answer}
+                                        </AccordionPanel>
+                                    </AccordionItem>
+                                ))
+                            }
                         </Accordion>
                     </Stack>
                 </Container>
