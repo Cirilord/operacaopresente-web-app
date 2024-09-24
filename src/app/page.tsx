@@ -31,6 +31,7 @@ import {
 import { Select } from 'chakra-react-select'
 import { saveAs } from 'file-saver'
 import Image from 'next/image'
+import { Fragment } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react-icons/tb'
 import { generatePdf } from './actions'
@@ -63,31 +64,37 @@ export default function HomePage() {
     })
 
     return (
-        <VStack backgroundColor='#471ca8'>
-            <Container maxWidth='container.xl' paddingY={20}>
-                <HStack justifyContent='center' spacing={8}>
-                    <VStack alignItems='self-start' maxWidth='500px'>
-                        <Text
-                            as='h1'
-                            color='#ffffff'
-                            fontSize='xxx-large'
-                            fontWeight='700'>
-                            Operação presente
-                        </Text>
-                        <Text color='#ffffff'>
-                            Surpreenda a pessoa amada com um presente certeiro, de acordo com os gostos dela. Não tem como dar errado!
-                        </Text>
-                        <Button
-                            _hover={{}}
-                            backgroundColor='#D1105A'
-                            color='#ffffff'
-                            margin='20px auto 0'>
-                            Buscar presentes
-                        </Button>
-                    </VStack>
-                    <Image alt='Imagem principal' src='https://placehold.jp/300x400.png' height={400} width={300} />
-                </HStack>
-            </Container>
+        <Fragment>
+            <Box as='section' backgroundColor='#471ca8' width='full'>
+                <Container maxWidth='container.xl' paddingY={20}>
+                    <HStack justifyContent='center' spacing={8}>
+                        <VStack alignItems='self-start' maxWidth='500px'>
+                            <Text
+                                as='h1'
+                                color='#ffffff'
+                                fontSize='xxx-large'
+                                fontWeight='700'>
+                                Operação Presente
+                            </Text>
+                            <Text color='#ffffff'>
+                                Surpreenda a pessoa amada com um presente certeiro, de acordo com os gostos dela. Não tem como dar errado!
+                            </Text>
+                            <Button
+                                _active={{}}
+                                _hover={{}}
+                                backgroundColor='#D1105A'
+                                color='#ffffff'
+                                height={14}
+                                minWidth='250px'
+                                borderRadius='64px'
+                                margin='20px auto 0 0'>
+                                Buscar Presentes
+                            </Button>
+                        </VStack>
+                        <Image alt='Imagem principal' src='/static/3226204_43149.svg' height={550} width={500} />
+                    </HStack>
+                </Container>
+            </Box>
             <Box backgroundColor='#391686' width='100%'>
                 <Container maxWidth='container.xl' paddingY={20}>
                     <Stack alignItems='center'>
@@ -105,38 +112,37 @@ export default function HomePage() {
                             perguntas e pronto, um dossiê completo com ideias e sugestões de presentes com base naquilo que a
                             pessoa gosta. Chega de errar nos presente!
                         </Text>
-                        <Grid gap={6} templateColumns='repeat(4, 1fr)' width='100%'>
+                        <Grid gap={10} templateColumns='repeat(4, 1fr)' width='100%'>
                             <GridItem border='1px solid #ffffff' borderRadius='15px' height='250px' padding={4} width='100%'>
                                 <Center flexDirection='column' height='100%'>
-                                    <Text color='#ffffff' height='80px' textAlign='center'>
+                                    <Icon as={TbFileDescription} color='#ffffff' fontSize='45px' marginBottom='10px' />
+                                    <Text color='#ffffff' fontWeight='800' height='80px' textAlign='center'>
                                         Responda as perguntas
                                     </Text>
-                                    <Icon as={TbFileDescription} color='#ffffff' fontSize='35px' />
                                 </Center>
                             </GridItem>
                             <GridItem border='1px solid #ffffff' borderRadius='15px' height='250px' padding={4} width='100%'>
                                 <Center flexDirection='column' height='100%'>
-                                    <Text color='#ffffff' height='80px' textAlign='center'>
+                                    <Icon as={TbPigMoney} color='#ffffff' fontSize='45px' marginBottom='10px' />
+                                    <Text color='#ffffff' fontWeight='800' height='80px' textAlign='center'>
                                         Escolha um método de pagamento e realize o checkout
                                     </Text>
-                                    <Icon as={TbPigMoney} color='#ffffff' fontSize='35px' />
-                                    {/* <Icon as={TbCurrencyDollar} /> */}
                                 </Center>
                             </GridItem>
                             <GridItem border='1px solid #ffffff' borderRadius='15px' height='250px' padding={4} width='100%'>
                                 <Center flexDirection='column' height='100%'>
-                                    <Text color='#ffffff' height='80px' textAlign='center'>
+                                    <Icon as={TbChecklist} color='#ffffff' fontSize='45px' marginBottom='10px' />
+                                    <Text color='#ffffff' fontWeight='800' height='80px' textAlign='center'>
                                         Você receberá o dossiê com todas as dicas e ideias de presentes via e-mail
                                     </Text>
-                                    <Icon as={TbChecklist} color='#ffffff' fontSize='35px' />
                                 </Center>
                             </GridItem>
                             <GridItem border='1px solid #ffffff' borderRadius='15px' height='250px' padding={4} width='100%'>
                                 <Center flexDirection='column' height='100%'>
-                                    <Text color='#ffffff' height='80px' textAlign='center'>
+                                    <Icon as={TbHeartFilled} color='#ffffff' fontSize='45px' marginBottom='10px' />
+                                    <Text color='#ffffff' fontWeight='800' height='80px' textAlign='center'>
                                         Surpreenda quem você ama
                                     </Text>
-                                    <Icon as={TbHeartFilled} color='#ffffff' fontSize='35px' />
                                 </Center>
                             </GridItem>
                         </Grid>
@@ -308,6 +314,6 @@ export default function HomePage() {
                     </Stack>
                 </Container>
             </Box>
-        </VStack>
+        </Fragment>
     )
 }

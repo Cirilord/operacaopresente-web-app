@@ -1,7 +1,7 @@
 import { extendTheme } from '@chakra-ui/react'
-import { Open_Sans } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 
-const nextFont = Open_Sans({
+const nextFont = Montserrat({
     subsets: ['latin'],
     weight: ['300', '400', '500', '600', '700', '800']
 })
