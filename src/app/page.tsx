@@ -65,33 +65,34 @@ export default function HomePage() {
 
     return (
         <Fragment>
-            <Box as='section' backgroundColor='#471ca8' width='full'>
-                <Container maxWidth='container.xl' paddingY={20}>
+            <Box as='section' backgroundColor='#6B3FA0' width='full'>
+                <Container maxWidth='container.xl' paddingY={28}>
                     <HStack justifyContent='center' spacing={8}>
                         <VStack alignItems='self-start' maxWidth='500px'>
                             <Text
                                 as='h1'
                                 color='#ffffff'
-                                fontSize='xxx-large'
-                                fontWeight='700'>
+                                fontSize='48px'
+                                fontWeight='700'
+                                letterSpacing='1px'>
                                 Operação Presente
                             </Text>
-                            <Text color='#ffffff'>
+                            <Text color='#ffffff' letterSpacing='1.5px'>
                                 Surpreenda a pessoa amada com um presente certeiro, de acordo com os gostos dela. Não tem como dar errado!
                             </Text>
                             <Button
-                                _active={{}}
-                                _hover={{}}
-                                backgroundColor='#D1105A'
+                                _active={{ backgroundColor: '#ff5959' }}
+                                _hover={{ backgroundColor: '#ff5959' }}
+                                backgroundColor='#FF6B6B'
+                                borderRadius='64px'
                                 color='#ffffff'
                                 height={14}
-                                minWidth='250px'
-                                borderRadius='64px'
-                                margin='20px auto 0 0'>
-                                Buscar Presentes
+                                margin='60px auto 0 0'
+                                minWidth='300px'>
+                                Encontre o Presente Ideal
                             </Button>
                         </VStack>
-                        <Image alt='Imagem principal' src='/static/3226204_43149.svg' height={550} width={500} />
+                        <Image alt='Imagem principal' height={380} src='/static/10172549_8307.svg' width={500} />
                     </HStack>
                 </Container>
             </Box>
