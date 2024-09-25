@@ -99,25 +99,54 @@
     ],
     "simple": [
         {
-            "hint": "",
+            "hint": "Leitura, Fotografia, Culinária, etc...",
             "id": "1",
-            "label": "Qual o hobby principal dessa pessoa? ",
+            "isMulti": false,
+            "label": "Quais os hobbies dessa pessoa?",
+            "maxLength": 100,
             "options": [],
-            "placeholder": "",
+            "placeholder": "Digite um ou mais os hobbies",
             "type": "input"
         },
         {
-            "hint": "Moderno, clássico, romântico, etc...",
+            "hint": "Experiências, Objetos, Personalização, etc...",
             "id": "2",
-            "label": "Qual é o estilo dela?",
+            "isMulti": false,
+            "label": "O que essa pessoa valoriza mais?",
+            "maxLength": 100,
             "options": [],
-            "placeholder": "",
+            "placeholder": "Digite uma ou mais opções",
             "type": "input"
         },
         {
-            "hint": "",
+            "hint": "Moderno, Clássico, Romântico, etc...",
             "id": "3",
+            "isMulti": true,
+            "label": "Quais os estilos dessa pessoa?",
+            "maxLength": 0,
+            "options": [
+                {
+                    "label": "Moderno",
+                    "value": "Moderno"
+                },
+                {
+                    "label": "Clássico",
+                    "value": "Clássico"
+                },
+                {
+                    "label": "Romântico",
+                    "value": "Romântico"
+                }
+            ],
+            "placeholder": "Escolha uma ou mais opções",
+            "type": "select"
+        },
+        {
+            "hint": "Idade da pessoa",
+            "id": "4",
+            "isMulti": false,
             "label": "Qual a faixa etária?",
+            "maxLength": 0,
             "options": [
                 {
                     "label": "0-5 anos",
@@ -160,9 +189,11 @@
             "type": "select"
         },
         {
-            "hint": "",
-            "id": "4",
+            "hint": "Aniversário, Natal, Casamento, etc...",
+            "id": "5",
+            "isMulti": false,
             "label": "Qual é a ocasião para o presente?",
+            "maxLength": 0,
             "options": [
                 {
                     "value": "Aniversário",
@@ -241,17 +272,19 @@
             "type": "select"
         },
         {
-            "hint": "",
-            "id": "5",
+            "hint": "Amigo, Namorado, Parente, etc...",
+            "id": "6",
+            "isMulti": false,
             "label": "O que essa pessoa é sua?",
+            "maxLength": 0,
             "options": [
                 {
-                    "label": "Amigo",
-                    "value": "Amigo"
+                    "label": "Amigo(a)",
+                    "value": "Amigo(a)"
                 },
                 {
-                    "label": "Namorado",
-                    "value": "Namorado"
+                    "label": "Namorado(a)",
+                    "value": "Namorado(a)"
                 },
                 {
                     "label": "Parente",
@@ -266,17 +299,11 @@
             "type": "select"
         },
         {
-            "hint": "Experiências, objetos, personalização, etc...",
-            "id": "6",
-            "label": "O que essa pessoa valoriza mais?",
-            "options": [],
-            "placeholder": "",
-            "type": "input"
-        },
-        {
-            "hint": "",
+            "hint": "Até R$50",
             "id": "7",
+            "isMulti": false,
             "label": "Qual é o seu orçamento para esse presente?",
+            "maxLength": 0,
             "options": [
                 {
                     "label": "Até R$50",

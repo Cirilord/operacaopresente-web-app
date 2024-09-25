@@ -1,13 +1,21 @@
 'use server'
-import { ClientOptions, OpenAI } from 'openai'
-import { RESPONSE_TEMPLATE } from './constants'
 import Handlebars from 'handlebars'
 import jsPDF from 'jspdf'
+import { ClientOptions, OpenAI } from 'openai'
+import { RESPONSE_TEMPLATE } from './constants'
+
+Handlebars.registerHelper('isArray', function (array: unknown) {
+    return Array.isArray(array)
+})
+
+Handlebars.registerHelper('join', function (array: unknown, separator: string) {
+    return Array.isArray(array) ? array.join(separator) : ''
+})
 
 const clientOptions: ClientOptions = { apiKey: process.env.OPENAI_API_KEY }
     , openAi = new OpenAI(clientOptions)
 
-export async function generatePdf(responses: { answer: string, question: string }[]) {
+export async function generatePdf(responses: { answer: string | string[], question: string }[]) {
 
     const template = Handlebars.compile(RESPONSE_TEMPLATE)
         , content = template({ responses })

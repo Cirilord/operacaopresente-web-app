@@ -12,5 +12,14 @@ export default extendTheme({
         heading: `${nextFont.style.fontFamily}, sans-serif`
     },
     initialColorMode: 'light',
+    styles: {
+        global: {
+            ':focus, :focus-visible, *[data-focus]': {
+                borderColor: 'inherit !important',
+                boxShadow: 'none !important',
+                outline: 'none !important'
+            }
+        }
+    },
     useSystemColorMode: false
 })

@@ -1,5 +1,6 @@
 'use client'
 import theme from '@/utils/theme'
+import { CacheProvider } from '@chakra-ui/next-js'
 import { ChakraProvider } from '@chakra-ui/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -25,9 +26,11 @@ export function Providers(props: ProvidersProps) {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <ChakraProvider theme={theme}>
-                {children}
-            </ChakraProvider>
+            <CacheProvider>
+                <ChakraProvider theme={theme}>
+                    {children}
+                </ChakraProvider>
+            </CacheProvider>
         </QueryClientProvider>
     )
 }

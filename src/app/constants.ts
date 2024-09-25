@@ -15,7 +15,7 @@ export const RESPONSE_TEMPLATE = `Dê 10 sugestões de presentes com base nas se
 
 **Informações do Usuário:**
 {{#each responses}}
-{{@index}}. {{this.question}} Resposta: {{this.answer}}
+{{@index}}. {{this.question}} Resposta: {{#if (isArray this.answer)}}{{join this.answer ", "}}{{else}}{{this.answer}}{{/if}}
 {{/each}}
 
 Por favor, retorne **apenas** o resultado em formato de array JSON. **Não inclua nenhuma formatação, texto adicional ou marcação.**.
