@@ -204,7 +204,8 @@ export default function HomePage() {
                             Encontre o presente ideal
                         </Text>
                         <Text color='#ffffff' fontSize='16px' lineHeight='1.75' marginTop={4} textAlign='center'>
-                            Responda as perguntas de acordo com a pessoa que irá receber o presente. Seja bem detalhado e nos conte tudo o que souber.
+                            Responda as perguntas de acordo com a pessoa que irá receber o presente.
+                            Seja bem detalhado e nos conte tudo o que souber.
                         </Text>
                         <Tabs
                             as='form'
@@ -364,31 +365,42 @@ export default function HomePage() {
                     </Stack>
                 </Container>
             </Box>
-            <Box backgroundColor='#391686' width='100%'>
-                <Container maxWidth='container.xl' paddingY={20}>
-                    <Stack alignItems='center'>
+            <Box as='section' backgroundColor='#FFF8E1' width='full'>
+                <Container maxWidth='container.xl' paddingY={[12, 20, 28]}>
+                    <Stack alignItems='center' spacing={0}>
                         <Text
                             as='h2'
-                            color='#ffffff'
-                            fontSize='xxx-large'
+                            color='#512E5F'
+                            fontSize={['36px', '48px', '56px']}
                             fontWeight='700'>
                             FAQ
                         </Text>
-                        <Accordion allowToggle={true} width='700px'>
+                        <Text color='#512E5F' fontSize='16px' lineHeight='1.75' marginTop={4} maxWidth='900px' textAlign='center'>
+                            Aqui estão as respostas para algumas das perguntas mais comuns que recebemos.<br />
+                            Se você não encontrar o que procura, fique à vontade para entrar em contato conosco!
+                        </Text>
+                        <Accordion as={Stack} allowToggle={true} marginTop={10} spacing={4} width='700px'>
                             {
                                 faq.map(({ answer, question }) => (
-                                    <AccordionItem key={question}>
-                                        <h2>
-                                            <AccordionButton>
-                                                <Box as='span' flex='1' textAlign='left'>
-                                                    {question}
-                                                </Box>
-                                                <AccordionIcon />
-                                            </AccordionButton>
-                                        </h2>
-                                        <AccordionPanel pb={4}>
-                                            {answer}
-                                        </AccordionPanel>
+                                    <AccordionItem key={question} backgroundColor='#ffffff' borderRadius='10px' border={0}>
+                                        {({ isExpanded }) => (
+                                            <Fragment>
+                                                <AccordionButton
+                                                    _hover={{ backgroundColor: '#512E5F' }}
+                                                    backgroundColor='#6b3fa0'
+                                                    borderRadius={isExpanded ? undefined : '10px'}
+                                                    borderTopRadius={isExpanded ? '10px' : undefined}
+                                                    color='#ffffff'>
+                                                    <Box as='span' flex='1' textAlign='left'>
+                                                        {question}
+                                                    </Box>
+                                                    <AccordionIcon />
+                                                </AccordionButton>
+                                                <AccordionPanel padding={4}>
+                                                    {answer}
+                                                </AccordionPanel>
+                                            </Fragment>
+                                        )}
                                     </AccordionItem>
                                 ))
                             }
