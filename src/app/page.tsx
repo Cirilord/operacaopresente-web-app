@@ -19,6 +19,8 @@ import {
     HStack,
     Icon,
     Input,
+    List,
+    ListItem,
     Stack,
     Tab,
     TabList,
@@ -34,6 +36,12 @@ import { Fragment } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react-icons/tb'
 import { generatePdf } from './actions'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+
+// eslint-disable-next-line
+// @ts-ignore
+const MotionBox = motion(Box)
 
 export default function HomePage() {
 
@@ -60,9 +68,61 @@ export default function HomePage() {
 
     return (
         <Fragment>
-            <Box as='section' backgroundColor='#6B3FA0' width='full'>
-                <Container maxWidth='container.xl' paddingY={28}>
-                    <HStack justifyContent='center' spacing={8}>
+            <Box as='header' backgroundColor='#FFF8E1' boxShadow='md' position='fixed' width='100vw' zIndex='1000'>
+                <Container as='nav' maxWidth='container.lg'>
+                    <HStack justifyContent='flex-end' paddingY={3} spacing={12}>
+                        <MotionBox
+                            animate={{
+                                rotate: [0, -10, 10, -5, 5, 0]
+                            }}
+                            initial={{ rotate: 0 }}
+                            marginRight='auto'
+                            transition={{
+                                duration: 2,
+                                ease: 'easeInOut',
+                                repeat: Infinity,
+                                repeatDelay: 1,
+                                times: [0, 0.2, 0.4, 0.6, 0.8, 0.9, 1]
+                            }}>
+                            <Image alt='Logo' height={12} src='/static/10613008_10070_rect.svg' width={12} />
+                        </MotionBox>
+                        <List alignItems='center' display='flex' spacing={0}>
+                            <ListItem color='#512E5F' fontWeight='600' marginRight={6}>
+                                <Link href='#conheça'>
+                                    Conheça
+                                </Link>
+                            </ListItem>
+                            <ListItem color='#512E5F' fontWeight='600'>
+                                <Link href='#faq'>
+                                    Faq
+                                </Link>
+                            </ListItem>
+                        </List>
+                        <Link href='#encontre-o-presente-ideal' passHref>
+                            <Button
+                                _active={{
+                                    backgroundColor: '#ff5959'
+                                }}
+                                _hover={{
+                                    boxShadow: 'lg',
+                                    transform: 'scale(1.05)'
+                                }}
+                                backgroundColor='#FF6B6B'
+                                borderRadius='64px'
+                                color='#ffffff'
+                                fontSize='13px'
+                                height={10}
+                                minWidth='230px'
+                                transition='background-color 0.2s, transform 0.2s'>
+                                Encontre o Presente Ideal
+                            </Button>
+                        </Link>
+                    </HStack>
+                </Container>
+            </Box>
+            <Box as='section' backgroundColor='#6B3FA0' paddingTop='72px' width='full'>
+                <Container maxWidth='container.lg' paddingY={28}>
+                    <HStack justifyContent='center' spacing={0}>
                         <VStack alignItems='self-start' maxWidth='500px'>
                             <Text
                                 as='h1'
@@ -75,31 +135,33 @@ export default function HomePage() {
                             <Text color='#ffffff' letterSpacing='1.5px'>
                                 Surpreenda a pessoa amada com um presente certeiro, de acordo com os gostos dela. Não tem como dar errado!
                             </Text>
-                            <Button
-                                _active={{
-                                    backgroundColor: '#ff5959'
-                                }}
-                                _hover={{
-                                    boxShadow: 'lg',
-                                    transform: 'scale(1.05)'
-                                }}
-                                backgroundColor='#FF6B6B'
-                                borderRadius='64px'
-                                color='#ffffff'
-                                height={14}
-                                marginTop={16}
-                                marginRight='auto'
-                                minWidth='300px'
-                                transition='background-color 0.2s, transform 0.2s'>
-                                Encontre o Presente Ideal
-                            </Button>
+                            <Link href='#encontre-o-presente-ideal' passHref>
+                                <Button
+                                    _active={{
+                                        backgroundColor: '#ff5959'
+                                    }}
+                                    _hover={{
+                                        boxShadow: 'lg',
+                                        transform: 'scale(1.05)'
+                                    }}
+                                    backgroundColor='#FF6B6B'
+                                    borderRadius='64px'
+                                    color='#ffffff'
+                                    height={14}
+                                    marginTop={16}
+                                    marginRight='auto'
+                                    minWidth='300px'
+                                    transition='background-color 0.2s, transform 0.2s'>
+                                    Encontre o Presente Ideal
+                                </Button>
+                            </Link>
                         </VStack>
                         <Image alt='Imagem principal' height={380} src='/static/10172549_8307.svg' width={500} />
                     </HStack>
                 </Container>
             </Box>
-            <Box as='section' backgroundColor='#FFF8E1' width='full'>
-                <Container maxWidth='container.xl' paddingY={[12, 20, 28]}>
+            <Box as='section' backgroundColor='#FFF8E1' id='conheça' width='full'>
+                <Container maxWidth='container.lg' paddingY={[12, 20, 28]}>
                     <Stack alignItems='center' spacing={0}>
                         <Text
                             as='h2'
@@ -115,20 +177,21 @@ export default function HomePage() {
                             perguntas e pronto, um dossiê completo com ideias e sugestões de presentes com base naquilo que a
                             pessoa gosta. Chega de errar nos presente!
                         </Text>
-                        <Grid gap={6} marginTop={10} templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(4, 1fr)']} maxWidth='1100px'>
+                        <Grid gap={4} marginTop={10} templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(4, 1fr)']} maxWidth='1100px'>
                             <Box
                                 _hover={{ boxShadow: 'lg', transform: 'scale(1.05)' }}
                                 backgroundColor='#6b3fa0'
                                 borderRadius='md'
                                 boxShadow='md'
                                 color='#ffffff'
-                                padding={6}
+                                paddingX={4}
+                                paddingY={6}
                                 userSelect='none'
                                 textAlign='center'
                                 transition='all 0.2s ease'>
                                 <Icon as={TbFileDescription} color='#ffffff' boxSize={12} marginBottom={4} />
-                                <Text color='#ffffff' fontWeight='bold'>Responda as perguntas</Text>
-                                <Text color='#e0e0e0' fontSize='sm'>Preencha nosso formulário simples e rápido.</Text>
+                                <Text color='#ffffff' fontSize='15px' fontWeight='bold'>Responda as perguntas</Text>
+                                <Text color='#e0e0e0' fontSize='13px'>Preencha nosso formulário simples e rápido.</Text>
                             </Box>
                             <Box
                                 _hover={{ boxShadow: 'lg', transform: 'scale(1.05)' }}
@@ -136,13 +199,14 @@ export default function HomePage() {
                                 borderRadius='md'
                                 boxShadow='md'
                                 color='#ffffff'
-                                padding={6}
+                                paddingX={4}
+                                paddingY={6}
                                 userSelect='none'
                                 textAlign='center'
                                 transition='all 0.2s ease'>
                                 <Icon as={TbPigMoney} color='#ffffff' boxSize={12} marginBottom={4} />
-                                <Text color='#ffffff' fontWeight='bold'>Escolha um método de pagamento</Text>
-                                <Text color='#e0e0e0' fontSize='sm'>Pagamento rápido e seguro.</Text>
+                                <Text color='#ffffff' fontSize='15px' fontWeight='bold'>Escolha um método de pagamento</Text>
+                                <Text color='#e0e0e0' fontSize='13px'>Pagamento rápido e seguro.</Text>
                             </Box>
                             <Box
                                 _hover={{ boxShadow: 'lg', transform: 'scale(1.05)' }}
@@ -150,13 +214,14 @@ export default function HomePage() {
                                 borderRadius='md'
                                 boxShadow='md'
                                 color='#ffffff'
-                                padding={6}
+                                paddingX={4}
+                                paddingY={6}
                                 userSelect='none'
                                 textAlign='center'
                                 transition='all 0.2s ease'>
                                 <Icon as={TbChecklist} color='#ffffff' boxSize={12} marginBottom={4} />
-                                <Text color='#ffffff' fontWeight='bold'>Receba o dossiê</Text>
-                                <Text color='#e0e0e0' fontSize='sm'>Receba todas as sugestões no seu e-mail.</Text>
+                                <Text color='#ffffff' fontSize='15px' fontWeight='bold'>Receba o dossiê</Text>
+                                <Text color='#e0e0e0' fontSize='13px'>Receba todas as sugestões no seu e-mail.</Text>
                             </Box>
                             <Box
                                 _hover={{ boxShadow: 'lg', transform: 'scale(1.05)' }}
@@ -164,37 +229,40 @@ export default function HomePage() {
                                 borderRadius='md'
                                 boxShadow='md'
                                 color='#ffffff'
-                                padding={6}
+                                paddingX={4}
+                                paddingY={6}
                                 userSelect='none'
                                 textAlign='center'
                                 transition='all 0.2s ease'>
                                 <Icon as={TbHeartFilled} color='#ffffff' boxSize={12} marginBottom={4} />
-                                <Text color='#ffffff' fontWeight='bold'>Surpreenda quem você ama</Text>
-                                <Text color='#e0e0e0' fontSize='sm'>Escolha o presente perfeito e faça o dia especial!</Text>
+                                <Text color='#ffffff' fontSize='15px' fontWeight='bold'>Surpreenda quem você ama</Text>
+                                <Text color='#e0e0e0' fontSize='13px'>Escolha o presente perfeito e faça o dia especial!</Text>
                             </Box>
                         </Grid>
-                        <Button
-                            _active={{
-                                backgroundColor: '#ff5959'
-                            }}
-                            _hover={{
-                                boxShadow: 'lg',
-                                transform: 'scale(1.05)'
-                            }}
-                            backgroundColor='#FF6B6B'
-                            borderRadius='64px'
-                            color='#ffffff'
-                            height={14}
-                            marginTop={16}
-                            minWidth='300px'
-                            transition='background-color 0.2s, transform 0.2s'>
-                            Encontre o Presente Ideal
-                        </Button>
+                        <Link href='#encontre-o-presente-ideal' passHref>
+                            <Button
+                                _active={{
+                                    backgroundColor: '#ff5959'
+                                }}
+                                _hover={{
+                                    boxShadow: 'lg',
+                                    transform: 'scale(1.05)'
+                                }}
+                                backgroundColor='#FF6B6B'
+                                borderRadius='64px'
+                                color='#ffffff'
+                                height={14}
+                                marginTop={16}
+                                minWidth='300px'
+                                transition='background-color 0.2s, transform 0.2s'>
+                                Encontre o Presente Ideal
+                            </Button>
+                        </Link>
                     </Stack>
                 </Container>
             </Box>
-            <Box as='section' backgroundColor='#6B3FA0' width='full'>
-                <Container maxWidth='container.xl' paddingY={[12, 20, 28]}>
+            <Box as='section' backgroundColor='#6B3FA0' id='encontre-o-presente-ideal' width='full'>
+                <Container maxWidth='container.lg' paddingY={[12, 20, 28]}>
                     <Stack alignItems='center' spacing={0}>
                         <Text
                             as='h2'
@@ -365,8 +433,8 @@ export default function HomePage() {
                     </Stack>
                 </Container>
             </Box>
-            <Box as='section' backgroundColor='#FFF8E1' width='full'>
-                <Container maxWidth='container.xl' paddingY={[12, 20, 28]}>
+            <Box as='section' backgroundColor='#FFF8E1' id='faq' width='full'>
+                <Container maxWidth='container.lg' paddingY={[12, 20, 28]}>
                     <Stack alignItems='center' spacing={0}>
                         <Text
                             as='h2'

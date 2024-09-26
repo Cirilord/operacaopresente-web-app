@@ -18,6 +18,9 @@ export default extendTheme({
                 borderColor: 'inherit !important',
                 boxShadow: 'none !important',
                 outline: 'none !important'
+            },
+            html: {
+                scrollBehavior: 'smooth'
             }
         }
     },
