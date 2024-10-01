@@ -38,10 +38,12 @@ import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react
 import { generatePdf } from './actions'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+// import { loadStripe } from '@stripe/stripe-js'
 
 // eslint-disable-next-line
 // @ts-ignore
 const MotionBox = motion(Box)
+    // , stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 export default function HomePage() {
 
