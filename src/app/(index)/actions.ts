@@ -44,7 +44,7 @@ export async function generatePdf(responses: { answer: string | string[], questi
         locale: 'pt-BR',
         metadata: { paymentId },
         mode: 'payment',
-        success_url: `${origin}/?success=true&paymentId=${paymentId}`
+        success_url: `${origin}/sucesso?paymentId=${paymentId}`
     })
 
     // const a = await stripe.checkout.sessions.retrieve(session.id)

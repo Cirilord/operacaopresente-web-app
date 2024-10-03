@@ -38,16 +38,16 @@ export default async function SuccessPage(props: SuccessPageProps) {
             <Box as='section' backgroundColor='#6B3FA0' minHeight='100vh' paddingTop='72px' width='full'>
                 <Container maxWidth='container.lg' paddingY={28}>
                     <Stack alignItems='center' spacing={0}>
-                        <Text
-                            as='h2'
-                            color='#ffffff'
-                            fontSize={['36px', '48px', '56px']}
-                            fontWeight='700'>
-                            Dossiê Gerado com Sucesso!
-                        </Text>
                         {
                             session.payment_status === 'paid' &&
                             <Fragment>
+                                <Text
+                                    as='h2'
+                                    color='#ffffff'
+                                    fontSize={['36px', '48px', '56px']}
+                                    fontWeight='700'>
+                                    Dossiê Gerado com Sucesso!
+                                </Text>
                                 <Text color='#ffffff' fontSize='16px' lineHeight='1.75' marginTop={4} maxWidth='900px' textAlign='center'>
                                     Obrigado, {session.customer_details?.name}! Seu pagamento de R$ {(session.amount_total || 0) / 100} foi
                                     confirmado com sucesso. Seu dossiê personalizado de presentes está pronto para download.
@@ -56,9 +56,15 @@ export default async function SuccessPage(props: SuccessPageProps) {
                             </Fragment>
                         }
                         {
-
                             session.payment_status === 'unpaid' &&
                             <Fragment>
+                                <Text
+                                    as='h2'
+                                    color='#ffffff'
+                                    fontSize={['36px', '48px', '56px']}
+                                    fontWeight='700'>
+                                    Aguardando Pagamento!
+                                </Text>
                                 <Text color='#ffffff' fontSize='16px' lineHeight='1.75' marginTop={4} maxWidth='900px' textAlign='center'>
                                     Obrigado, {session.customer_details?.name}! Recebemos sua solicitação de pagamento no valor de R$ {(session.amount_total || 0) / 100}.
                                     Assim que o pagamento for confirmado, o seu dossiê será gerado e você

@@ -1,4 +1,4 @@
-import Header from '@/components/Header'
+import { Box, Container } from '@chakra-ui/react'
 import { Fragment } from 'react'
 
 export type PreviewPageProps = {
@@ -13,7 +13,11 @@ export default async function PreviewPage(props: PreviewPageProps) {
 
     return (
         <Fragment>
-            <Header />
+            <Box as='section' width='full'>
+                <Container backgroundColor='#6B3FA0' maxWidth='container.lg' paddingY={28}>
+                    Test
+                </Container>
+            </Box>
         </Fragment>
     )
 }
