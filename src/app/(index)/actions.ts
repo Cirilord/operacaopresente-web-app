@@ -7,6 +7,7 @@ import { Stripe } from 'stripe'
 import { headers } from 'next/headers'
 import { redirect, RedirectType } from 'next/navigation'
 import { v7 as uuidv7 } from 'uuid'
+import { db } from '@/lib/firebaseConfig'
 
 Handlebars.registerHelper('isArray', function (array: unknown) {
     return Array.isArray(array)
@@ -28,7 +29,7 @@ export async function generatePdf(responses: { answer: string | string[], questi
         , origin = readonlyHeaders.get('origin') || ''
         , paymentId = uuidv7()
 
-    // debugger
+    debugger
 
     // console.log(readonlyHeaders.get('origin'))
 
@@ -46,7 +47,15 @@ export async function generatePdf(responses: { answer: string | string[], questi
         success_url: `${origin}/?success=true&paymentId=${paymentId}`
     })
 
+    // const a = await stripe.checkout.sessions.retrieve(session.id)
+
     debugger
+
+    const docRef = await db.collection('payments').doc(paymentId).set({
+        stripeId: session.id
+    })
+
+    // debugger
 
     if (session.url) {
         redirect(session.url, RedirectType.push)

@@ -31,19 +31,19 @@ import {
     VStack
 } from '@chakra-ui/react'
 import { Select } from 'chakra-react-select'
-import { saveAs } from 'file-saver'
-import { motion } from 'framer-motion'
-import Link from 'next/link'
+// import { saveAs } from 'file-saver'
 import { Fragment } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react-icons/tb'
 import { generatePdf } from './actions'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
 // import { loadStripe } from '@stripe/stripe-js'
 
 // eslint-disable-next-line
 // @ts-ignore
 const MotionBox = motion(Box)
-// , stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+    // , stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 export default function HomePage() {
 
@@ -52,15 +52,16 @@ export default function HomePage() {
     const onSubmit = formMethods.handleSubmit(async values => {
         try {
 
-            const response = await generatePdf(values.responses)
+            // const response =
+            await generatePdf(values.responses)
 
-            if (response.success) {
+            // if (response.success) {
 
-                const uint8Array = new Uint8Array(response.data.output)
-                    , blob = new Blob([uint8Array], { type: 'application/pdf' })
+            //     const uint8Array = new Uint8Array(response.data.output)
+            //         , blob = new Blob([uint8Array], { type: 'application/pdf' })
 
-                saveAs(blob, 'test.pdf')
-            }
+            //     saveAs(blob, 'test.pdf')
+            // }
         }
         catch (error) {
 
