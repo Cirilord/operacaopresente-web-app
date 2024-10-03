@@ -1,6 +1,6 @@
 import Header from '@/components/Header'
 import { db } from '@/lib/firebaseConfig'
-import { Box, Button, Container, Stack, Text } from '@chakra-ui/react'
+import { Box, Container, Stack, Text } from '@chakra-ui/react'
 import { redirect } from 'next/navigation'
 import { Fragment } from 'react'
 import Stripe from 'stripe'

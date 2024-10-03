@@ -19,8 +19,6 @@ import {
     HStack,
     Icon,
     Input,
-    List,
-    ListItem,
     Stack,
     Tab,
     TabList,
@@ -32,18 +30,13 @@ import {
 } from '@chakra-ui/react'
 import { Select } from 'chakra-react-select'
 // import { saveAs } from 'file-saver'
+import Header from '@/components/Header'
+import Link from 'next/link'
 import { Fragment } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react-icons/tb'
 import { generatePdf } from './actions'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
 // import { loadStripe } from '@stripe/stripe-js'
-
-// eslint-disable-next-line
-// @ts-ignore
-const MotionBox = motion(Box)
-    // , stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 export default function HomePage() {
 
@@ -71,58 +64,7 @@ export default function HomePage() {
 
     return (
         <Fragment>
-            <Box as='header' backgroundColor='#FFF8E1' boxShadow='md' position='fixed' width='100vw' zIndex='1000'>
-                <Container as='nav' maxWidth='container.lg'>
-                    <HStack justifyContent='flex-end' paddingY={3} spacing={12}>
-                        <MotionBox
-                            animate={{
-                                rotate: [0, -10, 10, -5, 5, 0]
-                            }}
-                            initial={{ rotate: 0 }}
-                            marginRight='auto'
-                            transition={{
-                                duration: 2,
-                                ease: 'easeInOut',
-                                repeat: Infinity,
-                                repeatDelay: 1,
-                                times: [0, 0.2, 0.4, 0.6, 0.8, 0.9, 1]
-                            }}>
-                            <Image alt='Logo' height={12} src='/static/10613008_10070_rect.svg' width={12} />
-                        </MotionBox>
-                        <List alignItems='center' display='flex' spacing={0}>
-                            <ListItem color='#512E5F' fontWeight='600' marginRight={6}>
-                                <Link href='#conheça'>
-                                    Conheça
-                                </Link>
-                            </ListItem>
-                            <ListItem color='#512E5F' fontWeight='600'>
-                                <Link href='#faq'>
-                                    Faq
-                                </Link>
-                            </ListItem>
-                        </List>
-                        <Link href='#encontre-o-presente-ideal' passHref>
-                            <Button
-                                _active={{
-                                    backgroundColor: '#ff5959'
-                                }}
-                                _hover={{
-                                    boxShadow: 'lg',
-                                    transform: 'scale(1.05)'
-                                }}
-                                backgroundColor='#FF6B6B'
-                                borderRadius='64px'
-                                color='#ffffff'
-                                fontSize='13px'
-                                height={10}
-                                minWidth='230px'
-                                transition='background-color 0.2s, transform 0.2s'>
-                                Encontre o Presente Ideal
-                            </Button>
-                        </Link>
-                    </HStack>
-                </Container>
-            </Box>
+            <Header />
             <Box as='section' backgroundColor='#6B3FA0' paddingTop='72px' width='full'>
                 <Container maxWidth='container.lg' paddingY={28}>
                     <HStack justifyContent='center' spacing={0}>
@@ -477,6 +419,24 @@ export default function HomePage() {
                             }
                         </Accordion>
                     </Stack>
+                </Container>
+            </Box>
+            <Box as='section' backgroundColor='#6B3FA0' id='encontre-o-presente-ideal' width='full'>
+                <Container display='flex' justifyContent='center' maxWidth='container.xl' paddingY={4}>
+                    {/* <Text as='span' color='#ffffff' fontSize='sm'>
+                        Copyright{' '}©{' '}{(new Date).getFullYear()}
+                    </Text> */}
+                    <Text as='span' color='#ffffff' fontSize='sm'>
+                        <Link href='/terms-of-use' target='_blank'>
+                            Termos de uso
+                        </Link>
+                        <Text as='span'>
+                            {' '}•{' '}
+                        </Text>
+                        <Link href='/privacy-policy' target='_blank'>
+                            Termos de privacidade
+                        </Link>
+                    </Text>
                 </Container>
             </Box>
         </Fragment>
