@@ -1,4 +1,6 @@
 'use client'
+import Footer from '@/components/Footer'
+import Header from '@/components/Header'
 import faq from '@/data/faq.json'
 import questions from '@/data/questions.json'
 import { Image } from '@chakra-ui/next-js'
@@ -29,8 +31,6 @@ import {
     VStack
 } from '@chakra-ui/react'
 import { Select } from 'chakra-react-select'
-// import { saveAs } from 'file-saver'
-import Header from '@/components/Header'
 import Link from 'next/link'
 import { Fragment } from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -101,7 +101,7 @@ export default function HomePage() {
                                 </Button>
                             </Link>
                         </VStack>
-                        <Image alt='Imagem principal' height={380} src='/static/10172549_8307.svg' width={500} />
+                        <Image alt='Imagem principal' height={380} src='/static/10172549_8307.svg' width={492} />
                     </HStack>
                 </Container>
             </Box>
@@ -421,24 +421,7 @@ export default function HomePage() {
                     </Stack>
                 </Container>
             </Box>
-            <Box as='section' backgroundColor='#6B3FA0' id='encontre-o-presente-ideal' width='full'>
-                <Container display='flex' justifyContent='center' maxWidth='container.xl' paddingY={4}>
-                    {/* <Text as='span' color='#ffffff' fontSize='sm'>
-                        Copyright{' '}©{' '}{(new Date).getFullYear()}
-                    </Text> */}
-                    <Text as='span' color='#ffffff' fontSize='sm'>
-                        <Link href='/terms-of-use' target='_blank'>
-                            Termos de uso
-                        </Link>
-                        <Text as='span'>
-                            {' '}•{' '}
-                        </Text>
-                        <Link href='/privacy-policy' target='_blank'>
-                            Termos de privacidade
-                        </Link>
-                    </Text>
-                </Container>
-            </Box>
+            <Footer />
         </Fragment>
     )
 }
