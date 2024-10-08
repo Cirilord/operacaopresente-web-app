@@ -9,11 +9,11 @@ import { redirect, RedirectType } from 'next/navigation'
 import { v7 as uuidv7 } from 'uuid'
 import { db } from '@/lib/firebaseConfig'
 
-Handlebars.registerHelper('isArray', function (array: unknown) {
+Handlebars.registerHelper('isArray', (array: unknown) => {
     return Array.isArray(array)
 })
 
-Handlebars.registerHelper('join', function (array: unknown, separator: string) {
+Handlebars.registerHelper('join', (array: unknown, separator: string) => {
     return Array.isArray(array) ? array.join(separator) : ''
 })
 

@@ -32,12 +32,14 @@ import {
 } from '@chakra-ui/react'
 import { Select } from 'chakra-react-select'
 import Link from 'next/link'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react-icons/tb'
 import { generatePdf } from './actions'
 
 export default function HomePage() {
+
+    const [planType, setPlanType] = useState<keyof typeof questions>('simple')
 
     const formMethods = useForm({
         defaultValues: {
@@ -59,10 +61,10 @@ export default function HomePage() {
     const onSubmit = formMethods.handleSubmit(async values => {
         try {
 
-            console.log(values)
+            const responses = values[planType]
+                , response = await generatePdf(responses)
 
-            // const response =
-            // await generatePdf(values.responses)
+            console.log(responses)
 
             // if (response.success) {
 
@@ -73,7 +75,6 @@ export default function HomePage() {
             // }
         }
         catch (error) {
-
             console.log(error)
         }
     })
@@ -247,6 +248,7 @@ export default function HomePage() {
                             marginTop={10}
                             variant='unstyled'
                             width='550px'
+                            onChange={tabIndex => setPlanType((['free', 'simple', 'advanced'] as Array<keyof typeof questions>)[tabIndex])}
                             onSubmit={onSubmit}>
                             <TabList
                                 backgroundColor='#FF6B6B'
