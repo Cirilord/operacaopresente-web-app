@@ -36,7 +36,6 @@ import { Fragment } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react-icons/tb'
 import { generatePdf } from './actions'
-// import { loadStripe } from '@stripe/stripe-js'
 
 export default function HomePage() {
 

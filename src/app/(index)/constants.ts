@@ -7,7 +7,6 @@ export const RESPONSE_TEMPLATE = `Dê 10 sugestões de presentes com base nas se
   - **categoria**: A categoria do presente (ex: Experiência, Acessório, Livro).
   - **tipo_do_presente**: O tipo do presente (ex: Objeto, Curso, Viagem, Experiência, Assinatura, Personalização, Desconhecido).
   - **faixa_de_preco_estimado**: A faixa de preço estimada para o presente.
-  - **links**: Um array de links onde o presente pode ser adquirido.
   - **experiencias_complementares**: Sugestões de experiências complementares relacionadas aos hobbies.
   - **dicas**: Dicas sobre como escolher o presente ideal.
   - **recomendacao**: Uma recomendação de artigo ou recurso adicional para ajudar na escolha do presente.
@@ -28,8 +27,7 @@ Retorne o resultado em formato de array JSON da seguinte forma:
         "explicacao": "string",
         "categoria": "string",
         "tipo_do_presente": "string",  // Objeto, Curso, Viagem, Experiência, Assinatura, Personalização, Desconhecido
-        "faixa_de_preco_estimado": "string",
-        "links": ["string"],
+        "faixa_de_preco_estimado": "number",
         "experiencias_complementares": ["string"],
         "dicas": "string",
         "recomendacao": "string",
