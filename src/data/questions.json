@@ -97,6 +97,28 @@
             "type": "input"
         }
     ],
+    "free": [
+        {
+            "hint": "Leitura, Fotografia, Culinária, etc...",
+            "id": "1",
+            "isMulti": false,
+            "label": "Quais os hobbies dessa pessoa?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "Digite um ou mais os hobbies",
+            "type": "input"
+        },
+        {
+            "hint": "Experiências, Objetos, Personalização, etc...",
+            "id": "2",
+            "isMulti": false,
+            "label": "O que essa pessoa valoriza mais?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "Digite uma ou mais opções",
+            "type": "input"
+        }
+    ],
     "simple": [
         {
             "hint": "Leitura, Fotografia, Culinária, etc...",

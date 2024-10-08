@@ -39,13 +39,30 @@ import { generatePdf } from './actions'
 
 export default function HomePage() {
 
-    const formMethods = useForm({ defaultValues: { responses: [] as { answer: string | string[], question: string }[] } })
+    const formMethods = useForm({
+        defaultValues: {
+            advanced: questions.advanced.map(({ label, type }) => ({
+                answer: type === 'input' ? '' : ([] as string[]),
+                question: label
+            })),
+            free: questions.free.map(({ label, type }) => ({
+                answer: type === 'input' ? '' : ([] as string[]),
+                question: label
+            })),
+            simple: questions.simple.map(({ label, type }) => ({
+                answer: type === 'input' ? '' : ([] as string[]),
+                question: label
+            }))
+        }
+    })
 
     const onSubmit = formMethods.handleSubmit(async values => {
         try {
 
+            console.log(values)
+
             // const response =
-            await generatePdf(values.responses)
+            // await generatePdf(values.responses)
 
             // if (response.success) {
 
@@ -287,13 +304,13 @@ export default function HomePage() {
                                                 <FormControl key={id}>
                                                     <FormLabel marginBottom={1}>{label}</FormLabel>
                                                     <FormHelperText fontSize='smaller' marginTop={1}>{hint}</FormHelperText>
-                                                    <Input type='hidden' {...formMethods.register(`responses.${index}.question`, { value: label })} />
+                                                    <Input type='hidden' {...formMethods.register(`simple.${index}.question`)} />
                                                     {
                                                         type === 'input' &&
                                                         <Input
                                                             maxLength={maxLength}
                                                             placeholder={placeholder}
-                                                            {...formMethods.register(`responses.${index}.answer`)}
+                                                            {...formMethods.register(`simple.${index}.answer`)}
                                                         />
                                                     }
                                                     {
@@ -301,7 +318,7 @@ export default function HomePage() {
                                                         <Controller
                                                             control={formMethods.control}
                                                             defaultValue={isMulti ? [] : ''}
-                                                            name={`responses.${index}.answer`}
+                                                            name={`simple.${index}.answer`}
                                                             render={({ field }) => (
                                                                 <Select
                                                                     isMulti={isMulti}
@@ -328,30 +345,6 @@ export default function HomePage() {
                                 </TabPanel>
                                 <TabPanel padding={6} paddingBottom={0}>
                                 </TabPanel>
-                                {/* <TabPanel padding={6} paddingBottom={0}>
-                                    <Stack>
-                                        {
-                                            questions.advanced.map(({ hint, id, label, options, placeholder, type }, index) => (
-                                                <FormControl key={id}>
-                                                    <FormLabel marginBottom={1}>{label}</FormLabel>
-                                                    <FormHelperText fontSize='smaller' marginTop={1}>{hint}</FormHelperText>
-                                                    <Input type='hidden' {...formMethods.register(`responses.${index}.question`, { value: label })} />
-                                                    {
-                                                        type === 'input' &&
-                                                        <Input
-                                                            placeholder={placeholder}
-                                                            {...formMethods.register(`responses.${index}.answer`)}
-                                                        />
-                                                    }
-                                                    {
-                                                        type === 'select' &&
-                                                        <Select options={options} placeholder={placeholder} useBasicStyles={true} />
-                                                    }
-                                                </FormControl>
-                                            ))
-                                        }
-                                    </Stack>
-                                </TabPanel> */}
                             </TabPanels>
                             <Center margin='20px 0'>
                                 <Button
