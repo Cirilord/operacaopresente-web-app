@@ -10,8 +10,8 @@ export default function DownloadPdfButton(props: DownloadPdfButtonProps) {
 
     const { pdfUrl } = props
 
-    const onDownloadPdf = () => {
-        saveAs(pdfUrl, 'asd')
+    const onDownloadPdf = async () => {
+        saveAs(pdfUrl, 'Dossiê.pdf')
     }
 
     return (
