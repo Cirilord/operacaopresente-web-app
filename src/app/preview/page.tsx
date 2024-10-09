@@ -210,7 +210,7 @@ export default async function PreviewPage(props: PreviewPageProps) {
                                         </Text>
                                         <UnorderedList width='full'>
                                             {
-                                                (giftType[gift.tipo_do_presente as keyof typeof giftType])(Array.from(gift.keywords).join(' '), gift.nome_do_presente)
+                                                (giftType[gift.tipo_do_presente as keyof typeof giftType])(Array.from(gift.keywords).join(' '), gift.faixa_de_preco_estimado)
                                                     .map(({ link, name }, index) => (
                                                         <ListItem color={textColor} fontSize='18px' key={index}>
                                                             <Link href={encodeURI(link)} target='_blank'>{name}</Link>
