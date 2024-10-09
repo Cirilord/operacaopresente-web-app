@@ -61,17 +61,17 @@ export async function generatePdf(paymentId: string) {
 
     const thumbnail = await new Promise<string>(async (resolve, reject) => {
 
-        const xhr = new XHRPromise
-            , auth = new JWT(xhr, process.env.ILOVEPDF_PUBLIC_KEY!, process.env.ILOVEPDF_SECRET_KEY!)
-            , instance = new ILovePDFApi(process.env.ILOVEPDF_PUBLIC_KEY!, process.env.ILOVEPDF_SECRET_KEY!)
+        const instance = new ILovePDFApi(process.env.ILOVEPDF_PUBLIC_KEY!, process.env.ILOVEPDF_SECRET_KEY!)
             , task = instance.newTask('htmlpdf') as HtmlPdfTask
-            , token = await auth.getToken()
 
         await task.start()
 
         const url = `${origin}/preview?paymentId=${paymentId}`
             , baseFile = await task.addFile(url)
+            , xhr = new XHRPromise()
+            , auth = new JWT(xhr, process.env.ILOVEPDF_PUBLIC_KEY!, process.env.ILOVEPDF_SECRET_KEY!)
             , formData = new FormData()
+            , token = await auth.getToken()
 
         formData.append('server_filename', baseFile.serverFilename)
         formData.append('task', baseFile.taskId)

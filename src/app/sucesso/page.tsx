@@ -52,7 +52,7 @@ export default async function SuccessPage(props: SuccessPageProps) {
                                 </Text>
                                 <Text color='#ffffff' fontSize='16px' lineHeight='1.75' marginTop={4} maxWidth='900px' textAlign='center'>
                                     Obrigado, {session.customer_details?.name}! Seu pagamento de R$ {(session.amount_total || 0) / 100} foi
-                                    confirmado com sucesso.{' '}
+                                    confirmado com sucesso.<br />
                                     {
                                         payment.pdfUrl
                                             ? 'Seu dossiê personalizado de presentes está pronto para download.'
@@ -88,14 +88,6 @@ export default async function SuccessPage(props: SuccessPageProps) {
                             </Fragment>
 
                         }
-                    </Stack>
-                    <Stack>
-                        <pre>
-                            {JSON.stringify(payment, null, 4)}
-                        </pre>
-                        <pre>
-                            {JSON.stringify(session, null, 4)}
-                        </pre>
                     </Stack>
                 </Container>
             </Box>
