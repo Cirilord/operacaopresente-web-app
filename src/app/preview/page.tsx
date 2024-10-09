@@ -205,8 +205,11 @@ export default async function PreviewPage(props: PreviewPageProps) {
                                 {
                                     giftType[gift.tipo_do_presente as keyof typeof giftType] &&
                                     <Fragment>
-                                        <Text color={textColor} fontSize='28px' fontWeight='500' marginBottom={4} width='full'>
+                                        <Text color={textColor} fontSize='28px' fontWeight='500' width='full'>
                                             Links
+                                        </Text>
+                                        <Text color={textColor} fontSize='14px' fontStyle='italic' fontWeight='500' marginBottom={4} width='full'>
+                                            Os links abaixo incluem alguns que já estão filtrados pelo preço estimado.*
                                         </Text>
                                         <UnorderedList width='full'>
                                             {
