@@ -1,45 +1,29 @@
 'use server'
-import Handlebars from 'handlebars'
-import jsPDF from 'jspdf'
-import { ClientOptions, OpenAI } from 'openai'
-import { RESPONSE_TEMPLATE } from './constants'
-import { Stripe } from 'stripe'
+import questions from '@/data/questions.json'
+import { db } from '@/lib/firebaseConfig'
 import { headers } from 'next/headers'
 import { redirect, RedirectType } from 'next/navigation'
+import { Stripe } from 'stripe'
 import { v7 as uuidv7 } from 'uuid'
-import { db } from '@/lib/firebaseConfig'
+import { PlanType, Response } from './types'
 
-Handlebars.registerHelper('isArray', (array: unknown) => {
-    return Array.isArray(array)
-})
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
-Handlebars.registerHelper('join', (array: unknown, separator: string) => {
-    return Array.isArray(array) ? array.join(separator) : ''
-})
+export async function generatePayment(responses: Response[], planType: PlanType) {
 
-const clientOptions: ClientOptions = { apiKey: process.env.OPENAI_API_KEY }
-    , openAi = new OpenAI(clientOptions)
-    , stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
+    if (Object.keys(questions).includes(planType)) {
+        responses = responses.slice(0, questions[planType].length)
+    }
+    else {
+        return { error: {}, success: false } as const
+    }
 
-export async function generatePdf(responses: { answer: string | string[], question: string }[]) {
-
-    const template = Handlebars.compile(RESPONSE_TEMPLATE)
-        , content = template({ responses })
-        , readonlyHeaders = headers()
+    const readonlyHeaders = headers()
         , origin = readonlyHeaders.get('origin') || ''
         , paymentId = uuidv7()
 
-    debugger
-
-    const chatCompletion = await openAi.chat.completions.create({
-        messages: [{ role: 'user', content }],
-        model: 'gpt-4o-mini', // ou 'gpt-3.5-turbo'
-    })
-
-    const data = JSON.parse(chatCompletion.choices[0].message.content || '')
-
     const session = await stripe.checkout.sessions.create({
-        cancel_url: `${origin}/?canceled=true`,
+        cancel_url: origin,
         line_items: [
             {
                 price: 'price_1Q4uo0P7kMTPqIlVPRV9hUHr',
@@ -52,13 +36,15 @@ export async function generatePdf(responses: { answer: string | string[], questi
         success_url: `${origin}/sucesso?paymentId=${paymentId}`
     })
 
-    const docRef = await db.collection('payments').doc(paymentId).set({
+    await db.collection('payments').doc(paymentId).set({
         stripeId: session.id,
         responses,
-        data
+        data: []
     })
 
     if (session.url) {
         redirect(session.url, RedirectType.push)
     }
+
+    return { error: {}, success: false } as const
 }

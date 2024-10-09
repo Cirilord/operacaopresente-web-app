@@ -7,6 +7,7 @@ import Stripe from 'stripe'
 import { validate as uuidValidate } from 'uuid'
 import CopyLinkButton from './components/CopyLinkButton'
 import DownloadPdfButton from './components/DownloadPdfButton'
+import GeneratePdfButton from './components/GeneratePdfButton'
 
 export type SuccessPageProps = {
     searchParams: {
@@ -22,10 +23,11 @@ export default async function SuccessPage(props: SuccessPageProps) {
         redirect('/')
     }
 
-    const paymentDocument = await db.collection('payments').doc(paymentId).get()
-        , payment = paymentDocument.data()
+    const paymentDocument = db.collection('payments').doc(paymentId)
+        , paymentDocumentData = await paymentDocument.get()
+        , payment = paymentDocumentData.data()
 
-    if (!(paymentDocument.exists && payment)) {
+    if (!(paymentDocumentData.exists && payment)) {
         redirect('/')
     }
 
@@ -50,9 +52,21 @@ export default async function SuccessPage(props: SuccessPageProps) {
                                 </Text>
                                 <Text color='#ffffff' fontSize='16px' lineHeight='1.75' marginTop={4} maxWidth='900px' textAlign='center'>
                                     Obrigado, {session.customer_details?.name}! Seu pagamento de R$ {(session.amount_total || 0) / 100} foi
-                                    confirmado com sucesso. Seu dossiê personalizado de presentes está pronto para download.
+                                    confirmado com sucesso.{' '}
+                                    {
+                                        payment.pdfUrl
+                                            ? 'Seu dossiê personalizado de presentes está pronto para download.'
+                                            : 'Clique no botão abaixo para gerar seu dossiê.'
+                                    }
                                 </Text>
-                                <DownloadPdfButton pdfLink={payment.pdfLink} />
+                                {
+                                    !payment.pdfUrl &&
+                                    <GeneratePdfButton paymentId={paymentId} />
+                                }
+                                {
+                                    payment.pdfUrl &&
+                                    <DownloadPdfButton pdfUrl={payment.pdfUrl} />
+                                }
                             </Fragment>
                         }
                         {

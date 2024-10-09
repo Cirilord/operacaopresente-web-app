@@ -35,11 +35,12 @@ import Link from 'next/link'
 import { Fragment, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react-icons/tb'
-import { generatePdf } from './actions'
+import { generatePayment } from './actions'
+import { PlanType } from './types'
 
 export default function HomePage() {
 
-    const [planType, setPlanType] = useState<keyof typeof questions>('simple')
+    const [planType, setPlanType] = useState<PlanType>('simple')
 
     const formMethods = useForm({
         defaultValues: {
@@ -62,17 +63,7 @@ export default function HomePage() {
         try {
 
             const responses = values[planType]
-                , response = await generatePdf(responses)
-
-            console.log(responses)
-
-            // if (response.success) {
-
-            //     const uint8Array = new Uint8Array(response.data.output)
-            //         , blob = new Blob([uint8Array], { type: 'application/pdf' })
-
-            //     saveAs(blob, 'test.pdf')
-            // }
+                , response = await generatePayment(responses, planType)
         }
         catch (error) {
             console.log(error)
@@ -248,7 +239,7 @@ export default function HomePage() {
                             marginTop={10}
                             variant='unstyled'
                             width='550px'
-                            onChange={tabIndex => setPlanType((['free', 'simple', 'advanced'] as Array<keyof typeof questions>)[tabIndex])}
+                            onChange={tabIndex => setPlanType((['free', 'simple', 'advanced'] as PlanType[])[tabIndex])}
                             onSubmit={onSubmit}>
                             <TabList
                                 backgroundColor='#FF6B6B'

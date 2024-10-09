@@ -1,17 +1,17 @@
 'use client'
 import { Button } from '@chakra-ui/react'
-import { saveAs } from 'file-saver'
+import { generatePdf } from '../actions'
 
-export type DownloadPdfButtonProps = {
-    pdfUrl: string
+export type GeneratePdfButtonProps = {
+    paymentId: string
 }
 
-export default function DownloadPdfButton(props: DownloadPdfButtonProps) {
+export default function GeneratePdfButton(props: GeneratePdfButtonProps) {
 
-    const { pdfUrl } = props
+    const { paymentId } = props
 
-    const onDownloadPdf = () => {
-        saveAs(pdfUrl, 'asd')
+    const onGeneratePdf = async () => {
+        await generatePdf(paymentId)
     }
 
     return (
@@ -31,8 +31,8 @@ export default function DownloadPdfButton(props: DownloadPdfButtonProps) {
             marginTop={16}
             minWidth='230px'
             transition='background-color 0.2s, transform 0.2s'
-            onClick={onDownloadPdf}>
-            Baixar Dossiê
+            onClick={onGeneratePdf}>
+            Gerar Dossiê
         </Button>
     )
 }
