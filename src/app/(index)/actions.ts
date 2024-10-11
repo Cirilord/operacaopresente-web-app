@@ -49,6 +49,7 @@ export async function generatePayment(responsesUnparsed: Response[], planType: P
     await db.collection('payments').doc(paymentId).set({
         createdAt: new Date(),
         data: [],
+        pdfUrl: null,
         planType,
         responses,
         stripeId: session.id,
