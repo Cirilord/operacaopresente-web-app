@@ -250,12 +250,11 @@ export default function HomePage() {
                             isFitted={true}
                             isLazy={true}
                             marginTop={10}
-                            overflow='hidden'
                             variant='unstyled'
                             width='550px'
                             onChange={tabIndex => setPlanType((['free', 'simple', 'advanced'] as PlanType[])[tabIndex])}
                             onSubmit={onSubmit}>
-                            <TabList backgroundColor='#FF6B6B' color='#ffffff'>
+                            <TabList backgroundColor='#FF6B6B' borderTopLeftRadius='15px' borderTopRightRadius='15px' color='#ffffff'>
                                 <Tab padding={4}>
                                     <Text as='span' fontWeight='600'>
                                         Grátis
@@ -348,7 +347,7 @@ export default function HomePage() {
                                 <TabPanel padding={6} paddingBottom={0}>
                                 </TabPanel>
                             </TabPanels>
-                            <Center backgroundColor='#ffffff' paddingY='20px'>
+                            <Center backgroundColor='#ffffff' borderBottomLeftRadius='15px' borderBottomRightRadius='15px' paddingY='20px'>
                                 <Button
                                     _active={{
                                         backgroundColor: '#ff5959'
