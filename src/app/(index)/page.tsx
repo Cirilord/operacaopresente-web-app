@@ -244,23 +244,18 @@ export default function HomePage() {
                         </Text>
                         <Tabs
                             as='form'
-                            backgroundColor='#ffffff'
                             borderRadius='15px'
                             boxShadow='lg'
                             defaultIndex={1}
                             isFitted={true}
                             isLazy={true}
                             marginTop={10}
+                            overflow='hidden'
                             variant='unstyled'
                             width='550px'
                             onChange={tabIndex => setPlanType((['free', 'simple', 'advanced'] as PlanType[])[tabIndex])}
                             onSubmit={onSubmit}>
-                            <TabList
-                                backgroundColor='#FF6B6B'
-                                borderTopRightRadius='15px'
-                                borderTopLeftRadius='15px'
-                                color='#ffffff'
-                                position='relative'>
+                            <TabList backgroundColor='#FF6B6B' color='#ffffff'>
                                 <Tab padding={4}>
                                     <Text as='span' fontWeight='600'>
                                         Grátis
@@ -301,7 +296,7 @@ export default function HomePage() {
                                     </Text>
                                 </Tab>
                             </TabList>
-                            <TabPanels>
+                            <TabPanels backgroundColor='#ffffff'>
                                 <TabPanel padding={6} paddingBottom={0}>
                                 </TabPanel>
                                 <TabPanel padding={6} paddingBottom={0}>
@@ -353,7 +348,7 @@ export default function HomePage() {
                                 <TabPanel padding={6} paddingBottom={0}>
                                 </TabPanel>
                             </TabPanels>
-                            <Center margin='20px 0'>
+                            <Center backgroundColor='#ffffff' paddingY='20px'>
                                 <Button
                                     _active={{
                                         backgroundColor: '#ff5959'
