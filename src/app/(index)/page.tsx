@@ -28,6 +28,8 @@ import {
     TabPanels,
     Tabs,
     Text,
+    useToast,
+    UseToastOptions,
     VStack
 } from '@chakra-ui/react'
 import { Select } from 'chakra-react-select'
@@ -59,14 +61,26 @@ export default function HomePage() {
         }
     })
 
+    const toast = useToast({ duration: 3000, position: 'top-right' })
+
     const onSubmit = formMethods.handleSubmit(async values => {
+
+        const toastOptions: UseToastOptions = { status: 'error' }
+
         try {
 
             const responses = values[planType]
-                , response = await generatePayment(responses, planType)
+
+            await generatePayment(responses, planType)
+
+            throw new Error()
         }
         catch (error) {
-            console.log(error)
+            toastOptions.description = 'Por favor, contate o suporte'
+            toastOptions.title = 'Erro no servidor'
+        }
+        finally {
+            toast(toastOptions)
         }
     })
 
