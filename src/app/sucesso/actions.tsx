@@ -119,7 +119,7 @@ export async function generatePdf(paymentId: string) {
 
     const fileUrl = await getDownloadURL(fileRef)
 
-    await paymentDocument.update({ pdfUrl: fileUrl })
+    await paymentDocument.update({ pdfUrl: fileUrl, updatedAt: new Date() })
 
     revalidatePath(origin)
 }

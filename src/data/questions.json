@@ -1,102 +1,4 @@
 {
-    "advanced": [
-        {
-            "hint": "",
-            "id": "1",
-            "label": "Qual o hobby principal dessa pessoa?",
-            "options": [],
-            "placeholder": "",
-            "type": "input"
-        },
-        {
-            "hint": "",
-            "id": "2",
-            "label": "Quais filmes ela assiste?",
-            "options": [],
-            "placeholder": "",
-            "type": "input"
-        },
-        {
-            "hint": "",
-            "id": "3",
-            "label": "Qual o estilo musical ela mais gosta?",
-            "options": [],
-            "placeholder": "",
-            "type": "input"
-        },
-        {
-            "hint": "Exemplo: coleciona itens específicos",
-            "id": "4",
-            "label": "Quais manias essa pessoa tem?",
-            "options": [],
-            "placeholder": "",
-            "type": "input"
-        },
-        {
-            "hint": "Moderno, clássico, romântico, etc...",
-            "id": "5",
-            "label": "Qual é o estilo pessoal?",
-            "options": [],
-            "placeholder": "",
-            "type": "input"
-        },
-        {
-            "hint": "",
-            "id": "6",
-            "label": "Qual a cor favorita?",
-            "options": [],
-            "placeholder": "",
-            "type": "input"
-        },
-        {
-            "hint": "Amigo, namorado, parente, etc...",
-            "id": "7",
-            "label": "O que essa pessoa é sua?",
-            "options": [],
-            "placeholder": "",
-            "type": "input"
-        },
-        {
-            "hint": "",
-            "id": "8",
-            "label": "Ela mencionou recentemente algo que precisava?",
-            "options": [],
-            "placeholder": "",
-            "type": "input"
-        },
-        {
-            "hint": "",
-            "id": "9",
-            "label": "Qual a faixa etária dela?",
-            "options": [],
-            "placeholder": "",
-            "type": "input"
-        },
-        {
-            "hint": "Aniversário, Aniversário de namoro, Natal, etc...",
-            "id": "10",
-            "label": "Qual é a ocasião para o presente?",
-            "options": [],
-            "placeholder": "",
-            "type": "input"
-        },
-        {
-            "hint": "experiências, objetivos, personalização, etc...",
-            "id": "11",
-            "label": "O que essa pessoa valoriza mais?",
-            "options": [],
-            "placeholder": "",
-            "type": "input"
-        },
-        {
-            "hint": "",
-            "id": "12",
-            "label": "Qual é o seu orçamento para esse presente?",
-            "options": [],
-            "placeholder": "",
-            "type": "input"
-        }
-    ],
     "free": [
         {
             "hint": "Leitura, Fotografia, Culinária, etc...",
@@ -350,6 +252,128 @@
             ],
             "placeholder": "Escolha uma opção",
             "type": "select"
+        }
+    ],
+    "advanced": [
+        {
+            "hint": "",
+            "id": "1",
+            "isMulti": false,
+            "label": "Qual o hobby principal dessa pessoa?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "",
+            "id": "2",
+            "isMulti": false,
+            "label": "Quais filmes ela assiste?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "",
+            "id": "3",
+            "isMulti": false,
+            "label": "Qual o estilo musical ela mais gosta?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "Exemplo: coleciona itens específicos",
+            "id": "4",
+            "isMulti": false,
+            "label": "Quais manias essa pessoa tem?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "Moderno, clássico, romântico, etc...",
+            "id": "5",
+            "isMulti": false,
+            "label": "Qual é o estilo pessoal?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "",
+            "id": "6",
+            "isMulti": false,
+            "label": "Qual a cor favorita?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "Amigo, namorado, parente, etc...",
+            "id": "7",
+            "isMulti": false,
+            "label": "O que essa pessoa é sua?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "",
+            "id": "8",
+            "isMulti": false,
+            "label": "Ela mencionou recentemente algo que precisava?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "",
+            "id": "9",
+            "isMulti": false,
+            "label": "Qual a faixa etária dela?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "Aniversário, Aniversário de namoro, Natal, etc...",
+            "id": "10",
+            "isMulti": false,
+            "label": "Qual é a ocasião para o presente?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "experiências, objetivos, personalização, etc...",
+            "id": "11",
+            "isMulti": false,
+            "label": "O que essa pessoa valoriza mais?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "",
+            "type": "input"
+        },
+        {
+            "hint": "",
+            "id": "12",
+            "isMulti": false,
+            "label": "Qual é o seu orçamento para esse presente?",
+            "maxLength": 100,
+            "options": [],
+            "placeholder": "",
+            "type": "input"
         }
     ]
 }
