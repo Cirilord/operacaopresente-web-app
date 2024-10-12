@@ -5,24 +5,23 @@ import { headers } from 'next/headers'
 import { redirect, RedirectType } from 'next/navigation'
 import { Stripe } from 'stripe'
 import { v7 as uuidv7 } from 'uuid'
-import { z } from 'zod'
-import { ResponseSchema } from './schemas'
-import { PlanType, Response } from './types'
+import { PlanSchema } from './schemas'
+import { Plan } from './types'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
-export async function generatePayment(responsesUnparsed: Response[], planType: PlanType) {
+export async function generatePayment(planUnparsed: Plan) {
 
-    const responsesParsed = z.array(ResponseSchema).safeParse(responsesUnparsed)
+    const planParsed = PlanSchema.safeParse(planUnparsed)
 
-    if (!responsesParsed.success) {
+    if (!planParsed.success) {
         return { error: {}, success: false } as const
     }
 
-    let responses = responsesParsed.data
+    const { responses, type: planType } = planParsed.data
 
     if (Object.keys(questions).includes(planType)) {
-        responses = responses.slice(0, questions[planType].length)
+        responses.length = questions[planType].length
     }
     else {
         return { error: {}, success: false } as const

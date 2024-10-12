@@ -2,7 +2,7 @@
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import faq from '@/data/faq.json'
-import questions from '@/data/questions.json'
+import plans from '@/data/plans.json'
 import { Image } from '@chakra-ui/next-js'
 import {
     Accordion,
@@ -24,40 +24,35 @@ import {
     Stack,
     Tab,
     TabList,
-    TabPanel,
-    TabPanels,
     Tabs,
     Text,
     useToast,
     UseToastOptions,
     VStack
 } from '@chakra-ui/react'
-import { Select } from 'chakra-react-select'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { CreatableSelect, Select } from 'chakra-react-select'
 import Link from 'next/link'
 import { Fragment, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react-icons/tb'
 import { generatePayment } from './actions'
-import { PlanType } from './types'
+import { PlanSchema } from './schemas'
+import { Plan } from './types'
+import currency from 'currency.js'
 
 export default function HomePage() {
 
-    const [planType, setPlanType] = useState<PlanType>('simple')
+    const [planIndex, setPlanIndex] = useState(1)
 
-    const formMethods = useForm({
-        defaultValues: {
-            advanced: questions.advanced.map(({ label, type }) => ({
+    const formMethods = useForm<Plan>({
+        resolver: zodResolver(PlanSchema),
+        values: {
+            responses: plans[planIndex].fields.map(({ label, type }) => ({
                 answer: type === 'input' ? '' : ([] as string[]),
                 question: label
             })),
-            free: questions.free.map(({ label, type }) => ({
-                answer: type === 'input' ? '' : ([] as string[]),
-                question: label
-            })),
-            simple: questions.simple.map(({ label, type }) => ({
-                answer: type === 'input' ? '' : ([] as string[]),
-                question: label
-            }))
+            type: plans[planIndex].type as Plan['type']
         }
     })
 
@@ -69,9 +64,7 @@ export default function HomePage() {
 
         try {
 
-            const responses = values[planType]
-
-            await generatePayment(responses, planType)
+            await generatePayment(values)
 
             throw new Error()
         }
@@ -247,80 +240,82 @@ export default function HomePage() {
                             borderRadius='15px'
                             boxShadow='lg'
                             defaultIndex={1}
+                            index={planIndex}
                             isFitted={true}
                             isLazy={true}
                             marginTop={10}
                             variant='unstyled'
                             width='550px'
-                            onChange={tabIndex => setPlanType((['free', 'simple', 'advanced'] as PlanType[])[tabIndex])}
+                            onChange={tabIndex => setPlanIndex(tabIndex)}
                             onSubmit={onSubmit}>
                             <TabList backgroundColor='#FF6B6B' borderTopLeftRadius='15px' borderTopRightRadius='15px' color='#ffffff'>
-                                <Tab padding={4}>
-                                    <Text as='span' fontWeight='600'>
-                                        Grátis
-                                    </Text>
-                                </Tab>
-                                <Tab
-                                    _before={{
-                                        backgroundColor: '#FFF8E1',
-                                        borderRadius: '15px',
-                                        content: '""',
-                                        height: 'calc(100% - 10px)',
-                                        left: '-1px',
-                                        margin: '5px 0',
-                                        position: 'absolute',
-                                        width: '3px'
-                                    }}
-                                    padding={4}
-                                    position='relative'>
-                                    <Text as='span' fontWeight='600'>
-                                        Simples
-                                    </Text>
-                                </Tab>
-                                <Tab
-                                    _before={{
-                                        backgroundColor: '#FFF8E1',
-                                        borderRadius: '15px',
-                                        content: '""',
-                                        height: 'calc(100% - 10px)',
-                                        left: '-1px',
-                                        margin: '5px 0',
-                                        position: 'absolute',
-                                        width: '3px'
-                                    }}
-                                    padding={4}
-                                    position='relative'>
-                                    <Text as='span' fontWeight='600'>
-                                        Avançado
-                                    </Text>
-                                </Tab>
+                                {
+                                    plans.map((plan, index) => (
+                                        <Tab
+                                            _before={index === 0 ? undefined : {
+                                                backgroundColor: '#FFF8E1',
+                                                borderRadius: '15px',
+                                                content: '""',
+                                                height: 'calc(100% - 10px)',
+                                                left: '-1px',
+                                                margin: '5px 0',
+                                                position: 'absolute',
+                                                width: '3px'
+                                            }}
+                                            key={plan.id}
+                                            padding={4}
+                                            position='relative'>
+                                            <Text as='span' fontWeight='600'>
+                                                {plan.name}
+                                            </Text>
+                                        </Tab>
+                                    ))
+                                }
                             </TabList>
-                            <TabPanels backgroundColor='#ffffff'>
-                                <TabPanel padding={6} paddingBottom={0}>
-                                </TabPanel>
-                                <TabPanel padding={6} paddingBottom={0}>
-                                    <Stack>
-                                        {
-                                            questions.simple.map(({ hint, id, isMulti, label, maxLength, options, placeholder, type }, index) => (
-                                                <FormControl key={id}>
-                                                    <FormLabel marginBottom={1}>{label}</FormLabel>
-                                                    <FormHelperText fontSize='smaller' marginTop={1}>{hint}</FormHelperText>
-                                                    <Input type='hidden' {...formMethods.register(`simple.${index}.question`)} />
-                                                    {
-                                                        type === 'input' &&
-                                                        <Input
-                                                            maxLength={maxLength}
-                                                            placeholder={placeholder}
-                                                            {...formMethods.register(`simple.${index}.answer`)}
-                                                        />
-                                                    }
-                                                    {
-                                                        type === 'select' &&
-                                                        <Controller
-                                                            control={formMethods.control}
-                                                            defaultValue={isMulti ? [] : ''}
-                                                            name={`simple.${index}.answer`}
-                                                            render={({ field }) => (
+                            <Stack backgroundColor='#ffffff' padding={6} paddingBottom={0}>
+                                {
+                                    plans[planIndex].fields.map(({ hint, id, isClearable, isMulti, label, maxLength, options, placeholder, type }, index) => (
+                                        <FormControl key={id} isInvalid={!!formMethods.formState.errors.responses?.[index]?.answer}>
+                                            <FormLabel marginBottom={1}>{label}</FormLabel>
+                                            <FormHelperText fontSize='smaller' marginTop={1}>{hint}</FormHelperText>
+                                            <Input type='hidden' {...formMethods.register(`responses.${index}.question`)} />
+                                            {
+                                                type === 'input' &&
+                                                <Input
+                                                    maxLength={maxLength}
+                                                    placeholder={placeholder}
+                                                    {...formMethods.register(`responses.${index}.answer`)}
+                                                />
+                                            }
+                                            {
+                                                type === 'select' &&
+                                                <Controller
+                                                    control={formMethods.control}
+                                                    defaultValue={isMulti ? [] : ''}
+                                                    name={`responses.${index}.answer`}
+                                                    render={({ field }) => (
+                                                        <Fragment>
+                                                            {
+                                                                isClearable &&
+                                                                <CreatableSelect
+                                                                    formatCreateLabel={(inputValue) => inputValue}
+                                                                    isMulti={isMulti}
+                                                                    options={options}
+                                                                    placeholder={placeholder}
+                                                                    useBasicStyles={true}
+                                                                    {...field}
+                                                                    value={
+                                                                        isMulti
+                                                                            ? options.filter(c => field.value?.includes(c.value))
+                                                                            : options.find(c => c.value === field.value)
+                                                                    }
+                                                                    // eslint-disable-next-line
+                                                                    // @ts-ignore
+                                                                    onChange={val => field.onChange(Array.isArray(val) ? val.map(c => c.value) : val?.value)}
+                                                                />
+                                                            }
+                                                            {
+                                                                !isClearable &&
                                                                 <Select
                                                                     isMulti={isMulti}
                                                                     options={options}
@@ -336,17 +331,15 @@ export default function HomePage() {
                                                                     // @ts-ignore
                                                                     onChange={val => field.onChange(Array.isArray(val) ? val.map(c => c.value) : val?.value)}
                                                                 />
-                                                            )}
-                                                        />
-                                                    }
-                                                </FormControl>
-                                            ))
-                                        }
-                                    </Stack>
-                                </TabPanel>
-                                <TabPanel padding={6} paddingBottom={0}>
-                                </TabPanel>
-                            </TabPanels>
+                                                            }
+                                                        </Fragment>
+                                                    )}
+                                                />
+                                            }
+                                        </FormControl>
+                                    ))
+                                }
+                            </Stack>
                             <Center backgroundColor='#ffffff' borderBottomLeftRadius='15px' borderBottomRightRadius='15px' paddingY='20px'>
                                 <Button
                                     _active={{
@@ -364,7 +357,11 @@ export default function HomePage() {
                                     minWidth='300px'
                                     transition='background-color 0.2s, transform 0.2s'
                                     type='submit'>
-                                    Encontre o Presente Ideal
+                                    {
+                                        plans[planIndex].price === null
+                                            ? 'Faça um Teste Grátis'
+                                            : `Presente Ideal por ${currency(plans[planIndex].price, { decimal: ',', separator: '.', symbol: 'R$ ' }).format()}`
+                                    }
                                 </Button>
                             </Center>
                         </Tabs>
