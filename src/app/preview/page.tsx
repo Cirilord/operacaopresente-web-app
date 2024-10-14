@@ -184,7 +184,7 @@ export default async function PreviewPage(props: PreviewPageProps) {
                                     Preço Estimado
                                 </Text>
                                 <Text color={textColor} fontSize='18px' marginBottom={8} width='full'>
-                                    {currency(gift.faixa_de_preco_estimado as number, { decimal: ',', separator: '.', symbol: 'R$ ' }).format()}
+                                    {currency(gift.preco_estimado as number, { decimal: ',', separator: '.', symbol: 'R$ ' }).format()}
                                 </Text>
                                 <Text color={textColor} fontSize='28px' fontWeight='500' marginBottom={4} width='full'>
                                     Recomendação
@@ -213,7 +213,7 @@ export default async function PreviewPage(props: PreviewPageProps) {
                                         </Text>
                                         <UnorderedList width='full'>
                                             {
-                                                (giftType[gift.tipo_do_presente as keyof typeof giftType])(Array.from(gift.keywords).join(' '), gift.faixa_de_preco_estimado)
+                                                (giftType[gift.tipo_do_presente as keyof typeof giftType])(Array.from(gift.keywords).join(' '), gift.preco_estimado)
                                                     .map(({ link, name }, index) => (
                                                         <ListItem color={textColor} fontSize='18px' key={index}>
                                                             <Link href={encodeURI(link)} target='_blank'>{name}</Link>

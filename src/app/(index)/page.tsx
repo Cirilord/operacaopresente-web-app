@@ -32,6 +32,7 @@ import {
 } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CreatableSelect, Select } from 'chakra-react-select'
+import currency from 'currency.js'
 import Link from 'next/link'
 import { Fragment, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
@@ -39,13 +40,12 @@ import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react
 import { generatePayment } from './actions'
 import { PlanSchema } from './schemas'
 import { Plan } from './types'
-import currency from 'currency.js'
 
 export default function HomePage() {
 
     const [planIndex, setPlanIndex] = useState(1)
 
-    const formMethods = useForm<Plan>({
+    const formMethods = useForm({
         resolver: zodResolver(PlanSchema),
         values: {
             responses: plans[planIndex].fields.map(({ label, type }) => ({
@@ -59,20 +59,21 @@ export default function HomePage() {
     const toast = useToast({ duration: 3000, position: 'top-right' })
 
     const onSubmit = formMethods.handleSubmit(async values => {
-
-        const toastOptions: UseToastOptions = { status: 'error' }
-
         try {
 
-            await generatePayment(values)
+            const { success } = await generatePayment(values)
 
-            throw new Error()
+            if (!success) {
+                throw new Error()
+            }
         }
-        catch (error) {
+        catch {
+
+            const toastOptions: UseToastOptions = { status: 'error' }
+
             toastOptions.description = 'Por favor, contate o suporte'
             toastOptions.title = 'Erro no servidor'
-        }
-        finally {
+
             toast(toastOptions)
         }
     })

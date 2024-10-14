@@ -9,7 +9,7 @@
                 "label": "Quais os hobbies dessa pessoa?",
                 "maxLength": 100,
                 "options": [],
-                "placeholder": "Digite um ou mais os hobbies",
+                "placeholder": "Digite uma ou mais opções",
                 "type": "input"
             },
             {
@@ -22,6 +22,38 @@
                 "options": [],
                 "placeholder": "Digite uma ou mais opções",
                 "type": "input"
+            },
+            {
+                "hint": "Selecione uma faixa de valor",
+                "id": 3,
+                "isClearable": false,
+                "isMulti": false,
+                "label": "Qual é o seu orçamento para esse presente?",
+                "maxLength": 0,
+                "options": [
+                    {
+                        "label": "Até R$50",
+                        "value": "Até R$50"
+                    },
+                    {
+                        "label": "R$51 - R$100",
+                        "value": "R$51 - R$100"
+                    },
+                    {
+                        "label": "R$101 - R$200",
+                        "value": "R$101 - R$200"
+                    },
+                    {
+                        "label": "R$201 - R$300",
+                        "value": "R$201 - R$300"
+                    },
+                    {
+                        "label": "Acima de R$300",
+                        "value": "Acima de R$300"
+                    }
+                ],
+                "placeholder": "Escolha uma opção",
+                "type": "select"
             }
         ],
         "id": 1,
@@ -274,14 +306,14 @@
     {
         "fields": [
             {
-                "hint": "",
+                "hint": "Leitura, Fotografia, Culinária, etc...",
                 "id": 1,
                 "isClearable": false,
                 "isMulti": false,
-                "label": "Qual o hobby principal dessa pessoa?",
+                "label": "Quais os hobbies dessa pessoa?",
                 "maxLength": 100,
                 "options": [],
-                "placeholder": "",
+                "placeholder": "Digite uma ou mais opções",
                 "type": "input"
             },
             {
