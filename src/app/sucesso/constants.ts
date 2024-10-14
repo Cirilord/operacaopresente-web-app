@@ -6,7 +6,7 @@ Dê 3 sugestões de presentes com base nas seguintes informações e explique co
   - **nome_do_presente**: O nome do presente sugerido.
   - **explicacao**: A explicação de como a sugestão se relaciona com as respostas do usuário.
   - **categoria**: A categoria do presente (ex: [Experiência, Acessório, Livro]).
-  - **exemplos_de_categorias**: Sugestões com nomes específicos da categoria do presente. (ex: [O Alquimista, Colar de Prata, Curso de Pintura, Camiseta do Queen, Transformers], max: 0, min: 0)
+  - **exemplos_de_categorias**: Sugestões com nomes específicos da categoria do presente. (ex: [O Alquimista, Colar de Prata, Curso de Pintura, Camiseta do Queen, Transformers])
   - **tipo_do_presente**: O tipo do presente (ex: [Objeto, Curso, Viagem, Experiência, Assinatura, Personalização, Streaming, Desconhecido]).
   - **preco_estimado**: O preço estimado para o presente.
   - **experiencias_complementares**: Sugestões de experiências complementares relacionadas aos hobbies. (max: 1, min: 1)
@@ -28,7 +28,7 @@ Retorne o resultado em formato de array JSON da seguinte forma:
         "nome_do_presente": string,
         "explicacao": string,
         "categoria": string,
-        "exemplos_de_categorias": string[],
+        "exemplos_de_categorias": string[], // Setar uma array vazia
         "tipo_do_presente": string,  // Objeto, Curso, Viagem, Experiência, Assinatura, Personalização, Desconhecido
         "preco_estimado": number,
         "experiencias_complementares": string[],
