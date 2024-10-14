@@ -193,6 +193,16 @@ export default async function PreviewPage(props: PreviewPageProps) {
                                     {gift.recomendacao}
                                 </Text>
                                 <Text color={textColor} fontSize='28px' fontWeight='500' marginBottom={4} width='full'>
+                                    Itens Específicos
+                                </Text>
+                                <UnorderedList marginBottom={8} width='full'>
+                                    {
+                                        (gift.exemplos_de_categorias as any[]).map((exemploCategoria, index) => (
+                                            <ListItem color={textColor} fontSize='18px' key={index}>{exemploCategoria}</ListItem>
+                                        ))
+                                    }
+                                </UnorderedList>
+                                <Text color={textColor} fontSize='28px' fontWeight='500' marginBottom={4} width='full'>
                                     Experiências Complementares
                                 </Text>
                                 <UnorderedList marginBottom={8} width='full'>
