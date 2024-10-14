@@ -49,7 +49,7 @@ export async function generatePdf(paymentId: string) {
 
             const chatCompletion = await openAi.chat.completions.create({
                 messages: [{ role: 'user', content }],
-                model: 'gpt-4o-mini' // ou 'gpt-3.5-turbo'
+                model: 'gpt-4o-mini' // or 'gpt-3.5-turbo'
             })
 
             const data = JSON.parse(chatCompletion.choices[0].message.content || '')

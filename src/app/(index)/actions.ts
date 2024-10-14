@@ -10,22 +10,34 @@ import { Plan } from './types'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 export async function generatePayment(planUnparsed: Plan) {
-    try {
 
-        const planParsed = PlanSchema.safeParse(planUnparsed)
+    const planParsed = PlanSchema.safeParse(planUnparsed)
 
-        if (!planParsed.success) {
-            return { error: {}, success: false } as const
-        }
+    if (!planParsed.success) {
+        return { error: {}, success: false } as const
+    }
 
-        const { responses, type: planType } = planParsed.data
+    const { responses, type: planType } = planParsed.data
+
+    const defaultPayment = {
+        createdAt: new Date(),
+        data: [],
+        pdfUrl: null,
+        planType,
+        responses,
+        stripeId: null as string | null,
+        updatedAt: null
+    }
+
+    const paymentId = uuidv7()
+
+    if (['advanced', 'simple'].includes(planType)) {
 
         const readonlyHeaders = headers()
-            , origin = readonlyHeaders.get('origin') || ''
-            , paymentId = uuidv7()
+            , redirectUrl = readonlyHeaders.get('origin') || ''
 
         const session = await stripe.checkout.sessions.create({
-            cancel_url: origin,
+            cancel_url: redirectUrl,
             line_items: [
                 {
                     price: 'price_1Q4uo0P7kMTPqIlVPRV9hUHr',
@@ -35,26 +47,24 @@ export async function generatePayment(planUnparsed: Plan) {
             locale: 'pt-BR',
             metadata: { paymentId },
             mode: 'payment',
-            success_url: `${origin}/sucesso?paymentId=${paymentId}`
+            success_url: `${redirectUrl}/sucesso?paymentId=${paymentId}`
         })
 
-        await db.collection('payments').doc(paymentId).set({
-            createdAt: new Date(),
-            data: [],
-            pdfUrl: null,
-            planType,
-            responses,
-            stripeId: session.id,
-            updatedAt: null
-        })
+        if (session.id && session.url) {
 
-        if (session.url) {
-            redirect(session.url, RedirectType.push)
+            defaultPayment.stripeId = session.id
+
+            await db.collection('payments').doc(paymentId).set(defaultPayment)
+
+            return redirect(session.url, RedirectType.push)
         }
+    }
+    else if (planType === 'free') {
 
-        return { data: null, success: true } as const
+        await db.collection('payments').doc(paymentId).set(defaultPayment)
+
+        return redirect(`sucesso?paymentId=${paymentId}`, RedirectType.push)
     }
-    catch {
-        return { error: {}, success: false } as const
-    }
+
+    return { error: {}, success: false } as const
 }

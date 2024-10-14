@@ -15,12 +15,14 @@ export type SuccessPageProps = {
     }
 }
 
+export const maxDuration = 30
+
 export default async function SuccessPage(props: SuccessPageProps) {
 
     const { searchParams: { paymentId } } = props
 
     if (!(paymentId && uuidValidate(paymentId))) {
-        redirect('/')
+        return redirect('/')
     }
 
     const paymentDocument = db.collection('payments').doc(paymentId)
@@ -28,11 +30,11 @@ export default async function SuccessPage(props: SuccessPageProps) {
         , payment = paymentDocumentData.data()
 
     if (!(paymentDocumentData.exists && payment)) {
-        redirect('/')
+        return redirect('/')
     }
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
-        , session = await stripe.checkout.sessions.retrieve(payment.stripeId)
+        , session = payment.planType === 'free' ? null : await stripe.checkout.sessions.retrieve(payment.stripeId)
 
     return (
         <Fragment>
@@ -41,7 +43,35 @@ export default async function SuccessPage(props: SuccessPageProps) {
                 <Container maxWidth='container.lg' paddingY={28}>
                     <Stack alignItems='center' spacing={0}>
                         {
-                            session.payment_status === 'paid' &&
+                            payment.planType === 'free' &&
+                            <Fragment>
+                                <Text
+                                    as='h2'
+                                    color='#ffffff'
+                                    fontSize={['36px', '48px', '56px']}
+                                    fontWeight='700'>
+                                    Dossiê Gerado com Sucesso!
+                                </Text>
+                                <Text color='#ffffff' fontSize='16px' lineHeight='1.75' marginTop={4} maxWidth='900px' textAlign='center'>
+                                    Obrigado!<br />
+                                    {
+                                        payment.pdfUrl
+                                            ? 'Seu dossiê personalizado de presentes está pronto para download.'
+                                            : 'Clique no botão abaixo para gerar seu dossiê.'
+                                    }
+                                </Text>
+                                {
+                                    !payment.pdfUrl &&
+                                    <GeneratePdfButton paymentId={paymentId} />
+                                }
+                                {
+                                    payment.pdfUrl &&
+                                    <DownloadPdfButton pdfUrl={payment.pdfUrl} />
+                                }
+                            </Fragment>
+                        }
+                        {
+                            session?.payment_status === 'paid' &&
                             <Fragment>
                                 <Text
                                     as='h2'
@@ -70,7 +100,7 @@ export default async function SuccessPage(props: SuccessPageProps) {
                             </Fragment>
                         }
                         {
-                            session.payment_status === 'unpaid' &&
+                            session?.payment_status === 'unpaid' &&
                             <Fragment>
                                 <Text
                                     as='h2'

@@ -11,7 +11,7 @@ export const PlanSchema = z.object({
 }).refine((data) => {
     const { type, responses } = data
 
-    if (type === 'free' && responses.length > 2) {
+    if (type === 'free' && responses.length > 3) {
         return false
     }
     if (type === 'simple' && responses.length > 7) {

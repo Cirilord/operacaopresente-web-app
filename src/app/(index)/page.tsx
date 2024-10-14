@@ -61,9 +61,10 @@ export default function HomePage() {
     const onSubmit = formMethods.handleSubmit(async values => {
         try {
 
-            const { success } = await generatePayment(values)
+            const redirectResponse = { data: null, success: true }
+                , response = (await generatePayment(values)) || redirectResponse
 
-            if (!success) {
+            if (!response.success) {
                 throw new Error()
             }
         }

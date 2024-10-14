@@ -18,14 +18,14 @@ export default async function PreviewPage(props: PreviewPageProps) {
     const { searchParams: { paymentId } } = props
 
     if (!(paymentId && uuidValidate(paymentId))) {
-        redirect('/')
+        return redirect('/')
     }
 
     const paymentDocument = await db.collection('payments').doc(paymentId).get()
         , payment = paymentDocument.data()
 
     if (!(paymentDocument.exists && payment)) {
-        redirect('/')
+        return redirect('/')
     }
 
     const responses = Array.from<Record<string, any>>(payment.responses)
