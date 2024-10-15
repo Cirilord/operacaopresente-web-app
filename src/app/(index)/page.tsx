@@ -84,17 +84,27 @@ export default function HomePage() {
             <Header />
             <Box as='section' backgroundColor='#6B3FA0' paddingTop='72px' width='full'>
                 <Container maxWidth='container.lg' paddingY={28}>
-                    <HStack justifyContent='center' spacing={0}>
-                        <VStack alignItems='self-start' maxWidth='500px'>
+                    <HStack flexDirection={{ base: 'column', lg: 'row' }} justifyContent='center' spacing={0}>
+                        <VStack
+                            alignItems={{ base: 'center', lg: 'self-start' }}
+                            marginBottom={{ base: 6, lg: 0 }}
+                            maxWidth='500px'
+                            spacing={0}>
                             <Text
                                 as='h1'
                                 color='#ffffff'
-                                fontSize='48px'
+                                fontSize={{ base: '32px', sm: '38px', md: '44px', lg: '48px' }}
                                 fontWeight='700'
-                                letterSpacing='1px'>
+                                letterSpacing='1px'
+                                marginBottom={2}>
                                 Operação Presente
                             </Text>
-                            <Text color='#ffffff' letterSpacing='1.5px'>
+                            <Text
+                                color='#ffffff'
+                                fontSize={{ base: '14px', md: '15px', lg: '16px' }}
+                                letterSpacing='1.5px'
+                                marginBottom={{ base: 12, lg: 16 }}
+                                textAlign={{ base: 'center', lg: 'unset' }}>
                                 Surpreenda a pessoa amada com um presente certeiro, de acordo com os gostos dela. Não tem como dar errado!
                             </Text>
                             <Link href='#encontre-o-presente-ideal' passHref>
@@ -110,7 +120,6 @@ export default function HomePage() {
                                     borderRadius='64px'
                                     color='#ffffff'
                                     height={14}
-                                    marginTop={16}
                                     marginRight='auto'
                                     minWidth='300px'
                                     transition='background-color 0.2s, transform 0.2s'>
