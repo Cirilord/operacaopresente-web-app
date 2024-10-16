@@ -35,7 +35,7 @@ export default function Header(props: HeaderProps) {
                             <Image alt='Logo' height={12} src='/static/10613008_10070_rect.svg' width={12} />
                         </Link>
                     </MotionBox>
-                    <List alignItems='center' display='flex' spacing={0}>
+                    <List alignItems='center' display={{ base: 'none', md: 'flex' }} spacing={0}>
                         <ListItem color='#512E5F' fontWeight='600' marginRight={6}>
                             <Link href='#conheça'>
                                 Conheça

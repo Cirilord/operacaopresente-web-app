@@ -137,11 +137,17 @@ export default function HomePage() {
                         <Text
                             as='h2'
                             color='#512E5F'
-                            fontSize={['36px', '48px', '56px']}
+                            fontSize={{ base: '22px', sm: '30px', md: '48px', lg: '56px' }}
                             fontWeight='700'>
                             Como acertar no presente?
                         </Text>
-                        <Text color='#512E5F' fontSize='16px' lineHeight='1.75' marginTop={4} maxWidth='900px' textAlign='center'>
+                        <Text
+                            color='#512E5F'
+                            fontSize={{ base: '14px', lg: '16px' }}
+                            lineHeight='1.75'
+                            marginTop={4}
+                            maxWidth='900px'
+                            textAlign='center'>
                             Já passou por aquele momento em que você precisa escolher um presente para quem ama e não sabe o que dar?
                             Mesmo conhecendo/sabendo tudo (ou muitas coisas) sobre aquela pessoa, é difícil acertar e surpreender.
                             Então chegou o momento de você acertar no presente! No Operação Presente, você irá responder algumas
@@ -149,66 +155,56 @@ export default function HomePage() {
                             pessoa gosta. Chega de errar nos presente!
                         </Text>
                         <Grid gap={4} marginTop={10} templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(4, 1fr)']} maxWidth='1100px'>
-                            <Box
-                                _hover={{ boxShadow: 'lg', transform: 'scale(1.05)' }}
-                                backgroundColor='#6b3fa0'
-                                borderRadius='md'
-                                boxShadow='md'
-                                color='#ffffff'
-                                paddingX={4}
-                                paddingY={6}
-                                userSelect='none'
-                                textAlign='center'
-                                transition='all 0.2s ease'>
-                                <Icon as={TbFileDescription} color='#ffffff' boxSize={12} marginBottom={4} />
-                                <Text color='#ffffff' fontSize='15px' fontWeight='bold'>Responda as perguntas</Text>
-                                <Text color='#e0e0e0' fontSize='13px'>Preencha nosso formulário simples e rápido.</Text>
-                            </Box>
-                            <Box
-                                _hover={{ boxShadow: 'lg', transform: 'scale(1.05)' }}
-                                backgroundColor='#6b3fa0'
-                                borderRadius='md'
-                                boxShadow='md'
-                                color='#ffffff'
-                                paddingX={4}
-                                paddingY={6}
-                                userSelect='none'
-                                textAlign='center'
-                                transition='all 0.2s ease'>
-                                <Icon as={TbPigMoney} color='#ffffff' boxSize={12} marginBottom={4} />
-                                <Text color='#ffffff' fontSize='15px' fontWeight='bold'>Escolha um método de pagamento</Text>
-                                <Text color='#e0e0e0' fontSize='13px'>Pagamento rápido e seguro.</Text>
-                            </Box>
-                            <Box
-                                _hover={{ boxShadow: 'lg', transform: 'scale(1.05)' }}
-                                backgroundColor='#6b3fa0'
-                                borderRadius='md'
-                                boxShadow='md'
-                                color='#ffffff'
-                                paddingX={4}
-                                paddingY={6}
-                                userSelect='none'
-                                textAlign='center'
-                                transition='all 0.2s ease'>
-                                <Icon as={TbChecklist} color='#ffffff' boxSize={12} marginBottom={4} />
-                                <Text color='#ffffff' fontSize='15px' fontWeight='bold'>Receba o dossiê</Text>
-                                <Text color='#e0e0e0' fontSize='13px'>Receba todas as sugestões no seu e-mail.</Text>
-                            </Box>
-                            <Box
-                                _hover={{ boxShadow: 'lg', transform: 'scale(1.05)' }}
-                                backgroundColor='#6b3fa0'
-                                borderRadius='md'
-                                boxShadow='md'
-                                color='#ffffff'
-                                paddingX={4}
-                                paddingY={6}
-                                userSelect='none'
-                                textAlign='center'
-                                transition='all 0.2s ease'>
-                                <Icon as={TbHeartFilled} color='#ffffff' boxSize={12} marginBottom={4} />
-                                <Text color='#ffffff' fontSize='15px' fontWeight='bold'>Surpreenda quem você ama</Text>
-                                <Text color='#e0e0e0' fontSize='13px'>Escolha o presente perfeito e faça o dia especial!</Text>
-                            </Box>
+                            {
+                                [
+                                    {
+                                        icon: TbFileDescription,
+                                        subtitle: 'Preencha nosso formulário simples e rápido.',
+                                        title: 'Responda as perguntas'
+                                    },
+                                    {
+                                        icon: TbPigMoney,
+                                        subtitle: 'Pagamento rápido e seguro.',
+                                        title: 'Escolha um método de pagamento'
+                                    },
+                                    {
+                                        icon: TbChecklist,
+                                        subtitle: 'Receba todas as sugestões no seu e-mail.',
+                                        title: 'Receba o dossiê'
+                                    },
+                                    {
+                                        icon: TbHeartFilled,
+                                        subtitle: 'Escolha o presente perfeito e faça o dia especial!',
+                                        title: 'Surpreenda quem você ama'
+                                    }
+                                ].map(item => (
+                                    <Box
+                                        _hover={{ boxShadow: 'lg', transform: 'scale(1.05)' }}
+                                        backgroundColor='#6b3fa0'
+                                        borderRadius='md'
+                                        boxShadow='md'
+                                        color='#ffffff'
+                                        key={item.title}
+                                        paddingX={4}
+                                        paddingY={6}
+                                        textAlign='center'
+                                        userSelect='none'
+                                        transition='all 0.2s ease'>
+                                        <Icon as={item.icon} color='#ffffff' boxSize={12} marginBottom={4} />
+                                        <Text
+                                            color='#ffffff'
+                                            fontSize={{ base: '13px', md: '14px', lg: '15px' }}
+                                            fontWeight='bold'>
+                                            {item.title}
+                                        </Text>
+                                        <Text
+                                            color='#e0e0e0'
+                                            fontSize={{ base: '12px', lg: '13px' }}>
+                                            {item.subtitle}
+                                        </Text>
+                                    </Box>
+                                ))
+                            }
                         </Grid>
                         <Link href='#encontre-o-presente-ideal' passHref>
                             <Button
@@ -238,11 +234,16 @@ export default function HomePage() {
                         <Text
                             as='h2'
                             color='#ffffff'
-                            fontSize={['36px', '48px', '56px']}
+                            fontSize={{ base: '22px', sm: '30px', md: '48px', lg: '56px' }}
                             fontWeight='700'>
                             Encontre o presente ideal
                         </Text>
-                        <Text color='#ffffff' fontSize='16px' lineHeight='1.75' marginTop={4} textAlign='center'>
+                        <Text
+                            color='#ffffff'
+                            fontSize={{ base: '14px', lg: '16px' }}
+                            lineHeight='1.75'
+                            marginTop={4}
+                            textAlign='center'>
                             Responda as perguntas de acordo com a pessoa que irá receber o presente.
                             Seja bem detalhado e nos conte tudo o que souber.
                         </Text>
@@ -255,8 +256,9 @@ export default function HomePage() {
                             isFitted={true}
                             isLazy={true}
                             marginTop={10}
+                            maxWidth='550px'
                             variant='unstyled'
-                            width='550px'
+                            width='full'
                             onChange={tabIndex => setPlanIndex(tabIndex)}
                             onSubmit={onSubmit}>
                             <TabList backgroundColor='#FF6B6B' borderTopLeftRadius='15px' borderTopRightRadius='15px' color='#ffffff'>
@@ -385,15 +387,21 @@ export default function HomePage() {
                         <Text
                             as='h2'
                             color='#512E5F'
-                            fontSize={['36px', '48px', '56px']}
+                            fontSize={{ base: '22px', sm: '30px', md: '48px', lg: '56px' }}
                             fontWeight='700'>
                             FAQ
                         </Text>
-                        <Text color='#512E5F' fontSize='16px' lineHeight='1.75' marginTop={4} maxWidth='900px' textAlign='center'>
-                            Aqui estão as respostas para algumas das perguntas mais comuns que recebemos.<br />
+                        <Text
+                            color='#512E5F'
+                            fontSize={{ base: '14px', lg: '16px' }}
+                            lineHeight='1.75'
+                            marginTop={4}
+                            textAlign='center'>
+                            Aqui estão as respostas para algumas das perguntas mais comuns que recebemos.{' '}
+                            <Box as='br' display={{ base: 'none', md: 'unset' }} />
                             Se você não encontrar o que procura, fique à vontade para entrar em contato conosco!
                         </Text>
-                        <Accordion as={Stack} allowToggle={true} marginTop={10} spacing={4} width='700px'>
+                        <Accordion allowToggle={true} as={Stack} marginTop={10} maxWidth='700px' spacing={4} width='full'>
                             {
                                 faq.map(({ answer, question }) => (
                                     <AccordionItem key={question} backgroundColor='#ffffff' borderRadius='10px' border={0}>
@@ -406,12 +414,16 @@ export default function HomePage() {
                                                     borderTopRadius={isExpanded ? '10px' : undefined}
                                                     color='#ffffff'>
                                                     <Box as='span' flex='1' textAlign='left'>
-                                                        {question}
+                                                        <Text fontSize={{ base: '14px', lg: '16px' }}>
+                                                            {question}
+                                                        </Text>
                                                     </Box>
                                                     <AccordionIcon />
                                                 </AccordionButton>
                                                 <AccordionPanel padding={4}>
-                                                    {answer}
+                                                    <Text fontSize={{ base: '14px', lg: '16px' }}>
+                                                        {answer}
+                                                    </Text>
                                                 </AccordionPanel>
                                             </Fragment>
                                         )}
