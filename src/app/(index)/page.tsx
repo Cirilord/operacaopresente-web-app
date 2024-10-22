@@ -34,7 +34,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CreatableSelect, Select } from 'chakra-react-select'
 import Link from 'next/link'
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react-icons/tb'
 import { generatePayment } from './actions'
@@ -43,8 +43,7 @@ import { Plan } from './types'
 
 export default function HomePage() {
 
-    const [isLocked, setIsLocked] = useState(true)
-        , [planIndex, setPlanIndex] = useState(1)
+    const [planIndex, setPlanIndex] = useState(1)
 
     const formMethods = useForm({
         resolver: zodResolver(PlanSchema),
@@ -85,7 +84,7 @@ export default function HomePage() {
         }
     })
 
-    useEffect(() => {
+    const checkIsLocked = (maxPerDay: number) => {
 
         const lockedDate = localStorage.getItem('lockedDate')
 
@@ -96,18 +95,18 @@ export default function HomePage() {
                 , diffInMilliseconds = currentDate.getTime() - lockedDateParsed.getTime()
                 , diffInDays = diffInMilliseconds / (1000 * 60 * 60 * 24)
 
-            if (diffInDays >= 1) {
-                setIsLocked(false)
+            if (diffInDays >= maxPerDay) {
                 localStorage.removeItem('lockedDate')
+                return false
             }
             else {
-                setIsLocked(true)
+                return true
             }
         }
         else {
-            setIsLocked(false)
+            return false
         }
-    }, [])
+    }
 
     return (
         <Fragment>
@@ -406,7 +405,7 @@ export default function HomePage() {
                                     borderRadius='64px'
                                     color='#ffffff'
                                     height={14}
-                                    isDisabled={plans[planIndex].maxPerDay ? isLocked : false}
+                                    isDisabled={!!plans[planIndex].maxPerDay && checkIsLocked(plans[planIndex].maxPerDay)}
                                     isLoading={formMethods.formState.isSubmitting}
                                     minWidth='300px'
                                     transition='background-color 0.2s, transform 0.2s'
