@@ -3,6 +3,7 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import faq from '@/data/faq.json'
 import plans from '@/data/plans.json'
+import brazilianFormat from '@/lib/brazilianFormat'
 import { Image } from '@chakra-ui/next-js'
 import {
     Accordion,
@@ -32,9 +33,8 @@ import {
 } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CreatableSelect, Select } from 'chakra-react-select'
-import currency from 'currency.js'
 import Link from 'next/link'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react-icons/tb'
 import { generatePayment } from './actions'
@@ -43,7 +43,8 @@ import { Plan } from './types'
 
 export default function HomePage() {
 
-    const [planIndex, setPlanIndex] = useState(1)
+    const [isLocked, setIsLocked] = useState(true)
+        , [planIndex, setPlanIndex] = useState(1)
 
     const formMethods = useForm({
         resolver: zodResolver(PlanSchema),
@@ -64,7 +65,12 @@ export default function HomePage() {
             const redirectResponse = { data: null, success: true }
                 , response = (await generatePayment(values)) || redirectResponse
 
-            if (!response.success) {
+            if (response.success) {
+                if (values.type === 'free') {
+                    localStorage.setItem('lockedDate', (new Date).toISOString())
+                }
+            }
+            else {
                 throw new Error()
             }
         }
@@ -78,6 +84,30 @@ export default function HomePage() {
             toast(toastOptions)
         }
     })
+
+    useEffect(() => {
+
+        const lockedDate = localStorage.getItem('lockedDate')
+
+        if (lockedDate) {
+
+            const currentDate = new Date()
+                , lockedDateParsed = new Date(lockedDate)
+                , diffInMilliseconds = currentDate.getTime() - lockedDateParsed.getTime()
+                , diffInDays = diffInMilliseconds / (1000 * 60 * 60 * 24)
+
+            if (diffInDays >= 1) {
+                setIsLocked(false)
+                localStorage.removeItem('lockedDate')
+            }
+            else {
+                setIsLocked(true)
+            }
+        }
+        else {
+            setIsLocked(false)
+        }
+    }, [])
 
     return (
         <Fragment>
@@ -138,7 +168,8 @@ export default function HomePage() {
                             as='h2'
                             color='#512E5F'
                             fontSize={{ base: '22px', sm: '30px', md: '48px', lg: '56px' }}
-                            fontWeight='700'>
+                            fontWeight='700'
+                            textAlign='center'>
                             Como acertar no presente?
                         </Text>
                         <Text
@@ -194,12 +225,14 @@ export default function HomePage() {
                                         <Text
                                             color='#ffffff'
                                             fontSize={{ base: '13px', md: '14px', lg: '15px' }}
-                                            fontWeight='bold'>
+                                            fontWeight='bold'
+                                            textAlign='center'>
                                             {item.title}
                                         </Text>
                                         <Text
                                             color='#e0e0e0'
-                                            fontSize={{ base: '12px', lg: '13px' }}>
+                                            fontSize={{ base: '12px', lg: '13px' }}
+                                            textAlign='center'>
                                             {item.subtitle}
                                         </Text>
                                     </Box>
@@ -235,7 +268,8 @@ export default function HomePage() {
                             as='h2'
                             color='#ffffff'
                             fontSize={{ base: '22px', sm: '30px', md: '48px', lg: '56px' }}
-                            fontWeight='700'>
+                            fontWeight='700'
+                            textAlign='center'>
                             Encontre o presente ideal
                         </Text>
                         <Text
@@ -353,7 +387,13 @@ export default function HomePage() {
                                     ))
                                 }
                             </Stack>
-                            <Center backgroundColor='#ffffff' borderBottomLeftRadius='15px' borderBottomRightRadius='15px' paddingY='20px'>
+                            <Center
+                                backgroundColor='#ffffff'
+                                borderBottomLeftRadius='15px'
+                                borderBottomRightRadius='15px'
+                                flexDirection='column'
+                                gap={3}
+                                paddingY='20px'>
                                 <Button
                                     _active={{
                                         backgroundColor: '#ff5959'
@@ -366,6 +406,7 @@ export default function HomePage() {
                                     borderRadius='64px'
                                     color='#ffffff'
                                     height={14}
+                                    isDisabled={plans[planIndex].maxPerDay ? isLocked : false}
                                     isLoading={formMethods.formState.isSubmitting}
                                     minWidth='300px'
                                     transition='background-color 0.2s, transform 0.2s'
@@ -373,9 +414,15 @@ export default function HomePage() {
                                     {
                                         plans[planIndex].price === null
                                             ? 'Faça um Teste Grátis'
-                                            : `Presente Ideal por ${currency(plans[planIndex].price, { decimal: ',', separator: '.', symbol: 'R$ ' }).format()}`
+                                            : `Presente Ideal por ${brazilianFormat(plans[planIndex].price)}`
                                     }
                                 </Button>
+                                {
+                                    plans[planIndex].maxPerDay &&
+                                    <Text as='span' color='gray.400' fontSize='13px' fontStyle='italic'>
+                                        * Máximo de {plans[planIndex].maxPerDay} teste grátis por dia
+                                    </Text>
+                                }
                             </Center>
                         </Tabs>
                     </Stack>
@@ -388,7 +435,8 @@ export default function HomePage() {
                             as='h2'
                             color='#512E5F'
                             fontSize={{ base: '22px', sm: '30px', md: '48px', lg: '56px' }}
-                            fontWeight='700'>
+                            fontWeight='700'
+                            textAlign='center'>
                             FAQ
                         </Text>
                         <Text

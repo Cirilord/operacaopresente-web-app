@@ -57,6 +57,7 @@
             }
         ],
         "id": 1,
+        "maxPerDay": 1,
         "name": "Grátis",
         "price": null,
         "type": "free"
@@ -299,6 +300,7 @@
             }
         ],
         "id": 2,
+        "maxPerDay": null,
         "name": "Simples",
         "price": 3.99,
         "type": "simple"
@@ -439,6 +441,7 @@
             }
         ],
         "id": 3,
+        "maxPerDay": null,
         "name": "Avançado",
         "price": 5.99,
         "type": "advanced"

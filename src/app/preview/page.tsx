@@ -1,6 +1,6 @@
+import brazilianFormat from '@/lib/brazilianFormat'
 import { db } from '@/lib/firebaseConfig'
 import { Box, Container, Link, ListItem, Text, UnorderedList } from '@chakra-ui/react'
-import currency from 'currency.js'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import { Fragment } from 'react'
@@ -184,7 +184,7 @@ export default async function PreviewPage(props: PreviewPageProps) {
                                     Preço Estimado
                                 </Text>
                                 <Text color={textColor} fontSize='18px' marginBottom={8} width='full'>
-                                    {currency(gift.preco_estimado as number, { decimal: ',', separator: '.', symbol: 'R$ ' }).format()}
+                                    {brazilianFormat(gift.preco_estimado as number)}
                                 </Text>
                                 <Text color={textColor} fontSize='28px' fontWeight='500' marginBottom={4} width='full'>
                                     Recomendação

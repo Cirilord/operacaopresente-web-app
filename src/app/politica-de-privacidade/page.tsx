@@ -21,7 +21,8 @@ export default async function PrivacyPolicyPage(props: PrivacyPolicyPageProps) {
                             color='#ffffff'
                             fontSize={{ base: '22px', sm: '30px', md: '48px', lg: '56px' }}
                             fontWeight='700'
-                            marginBottom={{ base: 14, sm: 20 }}>
+                            marginBottom={{ base: 14, sm: 20 }}
+                            textAlign='center'>
                             Política de Privacidade
                         </Text>
                         <Text

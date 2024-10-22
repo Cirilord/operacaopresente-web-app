@@ -48,11 +48,18 @@ export default async function SuccessPage(props: SuccessPageProps) {
                                 <Text
                                     as='h2'
                                     color='#ffffff'
-                                    fontSize={['36px', '48px', '56px']}
-                                    fontWeight='700'>
+                                    fontSize={{ base: '22px', sm: '30px', md: '48px', lg: '56px' }}
+                                    fontWeight='700'
+                                    textAlign='center'>
                                     Dossiê Gerado com Sucesso!
                                 </Text>
-                                <Text color='#ffffff' fontSize='16px' lineHeight='1.75' marginTop={4} maxWidth='900px' textAlign='center'>
+                                <Text
+                                    color='#ffffff'
+                                    fontSize={{ base: '14px', lg: '16px' }}
+                                    lineHeight='1.75'
+                                    marginTop={4}
+                                    maxWidth='900px'
+                                    textAlign='center'>
                                     Obrigado!<br />
                                     {
                                         payment.pdfUrl
