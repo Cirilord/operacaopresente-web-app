@@ -320,7 +320,7 @@ export default function HomePage() {
                             </TabList>
                             <Stack backgroundColor='#ffffff' padding={6} paddingBottom={0}>
                                 {
-                                    plans[planIndex].fields.map(({ hint, id, isClearable, isMulti, label, maxLength, options, placeholder, type }, index) => (
+                                    plans[planIndex].fields.map(({ hint, id, isCreatable, isMulti, label, maxLength, options, placeholder, type }, index) => (
                                         <FormControl key={id} isInvalid={!!formMethods.formState.errors.responses?.[index]?.answer}>
                                             <FormLabel marginBottom={1}>{label}</FormLabel>
                                             <FormHelperText fontSize='smaller' marginTop={1}>{hint}</FormHelperText>
@@ -342,7 +342,7 @@ export default function HomePage() {
                                                     render={({ field }) => (
                                                         <Fragment>
                                                             {
-                                                                isClearable &&
+                                                                isCreatable &&
                                                                 <CreatableSelect
                                                                     formatCreateLabel={(inputValue) => inputValue}
                                                                     isMulti={isMulti}
@@ -361,7 +361,7 @@ export default function HomePage() {
                                                                 />
                                                             }
                                                             {
-                                                                !isClearable &&
+                                                                !isCreatable &&
                                                                 <Select
                                                                     isMulti={isMulti}
                                                                     options={options}

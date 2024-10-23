@@ -4,7 +4,7 @@
             {
                 "hint": "Leitura, Fotografia, Culinária, etc...",
                 "id": 1,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Quais os hobbies dessa pessoa?",
                 "maxLength": 100,
@@ -15,7 +15,7 @@
             {
                 "hint": "Experiências, Objetos, Personalização, etc...",
                 "id": 2,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "O que essa pessoa mais valoriza?",
                 "maxLength": 100,
@@ -26,7 +26,7 @@
             {
                 "hint": "Selecione uma faixa de valor",
                 "id": 3,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Qual é o seu orçamento para esse presente?",
                 "maxLength": 0,
@@ -67,7 +67,7 @@
             {
                 "hint": "Leitura, Fotografia, Culinária, etc...",
                 "id": 1,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Quais os hobbies dessa pessoa?",
                 "maxLength": 100,
@@ -78,7 +78,7 @@
             {
                 "hint": "Experiências, Objetos, Personalização, etc...",
                 "id": 2,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "O que essa pessoa mais valoriza?",
                 "maxLength": 100,
@@ -89,7 +89,7 @@
             {
                 "hint": "Moderno, Clássico, Romântico, etc...",
                 "id": 3,
-                "isClearable": true,
+                "isCreatable": true,
                 "isMulti": false,
                 "label": "Qual o estilo dessa pessoa?",
                 "maxLength": 0,
@@ -137,7 +137,7 @@
             {
                 "hint": "Idade da pessoa",
                 "id": 4,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Qual a faixa etária?",
                 "maxLength": 0,
@@ -185,7 +185,7 @@
             {
                 "hint": "Aniversário, Natal, Casamento, etc...",
                 "id": 5,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Qual é a ocasião para o presente?",
                 "maxLength": 0,
@@ -241,7 +241,7 @@
             {
                 "hint": "Amigo, Namorado, Parente, etc...",
                 "id": 6,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "O que essa pessoa é sua?",
                 "maxLength": 0,
@@ -269,7 +269,7 @@
             {
                 "hint": "Selecione uma faixa de valor",
                 "id": 7,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Qual é o seu orçamento para esse presente?",
                 "maxLength": 0,
@@ -310,7 +310,7 @@
             {
                 "hint": "Leitura, Fotografia, Culinária, etc...",
                 "id": 1,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Quais os hobbies dessa pessoa?",
                 "maxLength": 100,
@@ -321,7 +321,7 @@
             {
                 "hint": "Matrix, O Poderoso Chefão, Vingadores: Ultimato, etc...",
                 "id": 2,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Quais filmes ela assiste?",
                 "maxLength": 100,
@@ -330,20 +330,61 @@
                 "type": "input"
             },
             {
-                "hint": "Bohemian Rhapsody, Garota de Ipanema, Blinding Lights, etc...",
+                "hint": "Pop, Rock, Eletrônica, etc...",
                 "id": 3,
-                "isClearable": false,
+                "isCreatable": true,
                 "isMulti": false,
                 "label": "Qual o estilo musical ela mais gosta?",
-                "maxLength": 100,
-                "options": [],
-                "placeholder": "Digite uma ou mais opções",
-                "type": "input"
+                "maxLength": 0,
+                "options": [
+                    {
+                        "label": "Rock",
+                        "value": "Rock"
+                    },
+                    {
+                        "label": "Pop",
+                        "value": "Pop"
+                    },
+                    {
+                        "label": "Jazz",
+                        "value": "Jazz"
+                    },
+                    {
+                        "label": "Blues",
+                        "value": "Blues"
+                    },
+                    {
+                        "label": "Clássico",
+                        "value": "Clássico"
+                    },
+                    {
+                        "label": "Reggae",
+                        "value": "Reggae"
+                    },
+                    {
+                        "label": "Rap",
+                        "value": "Rap"
+                    },
+                    {
+                        "label": "Samba",
+                        "value": "Samba"
+                    },
+                    {
+                        "label": "Eletrônico",
+                        "value": "Eletrônico"
+                    },
+                    {
+                        "label": "Funk",
+                        "value": "Funk"
+                    }
+                ],
+                "placeholder": "Digite ou escolha uma opção",
+                "type": "select"
             },
             {
                 "hint": "Coleciona itens específicos, etc...",
                 "id": 4,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Quais manias essa pessoa tem?",
                 "maxLength": 100,
@@ -354,7 +395,7 @@
             {
                 "hint": "Moderno, Clássico, Romântico, etc...",
                 "id": 5,
-                "isClearable": true,
+                "isCreatable": true,
                 "isMulti": false,
                 "label": "Qual o estilo dessa pessoa?",
                 "maxLength": 0,
@@ -402,7 +443,7 @@
             {
                 "hint": "Vermelho, azul, verde, etc...",
                 "id": 6,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Qual a cor favorita dessa pessoa?",
                 "maxLength": 0,
@@ -454,7 +495,7 @@
             {
                 "hint": "Amigo, Namorado, Parente, etc...",
                 "id": 7,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "O que essa pessoa é sua?",
                 "maxLength": 0,
@@ -482,7 +523,7 @@
             {
                 "hint": "",
                 "id": 8,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Ela mencionou recentemente algo que precisava?",
                 "maxLength": 0,
@@ -502,7 +543,7 @@
             {
                 "hint": "Idade da pessoa",
                 "id": 9,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Qual a faixa etária?",
                 "maxLength": 0,
@@ -550,7 +591,7 @@
             {
                 "hint": "Aniversário, Natal, Casamento, etc...",
                 "id": 10,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Qual é a ocasião para o presente?",
                 "maxLength": 0,
@@ -606,7 +647,7 @@
             {
                 "hint": "Experiências, Objetos, Personalização, etc...",
                 "id": 11,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "O que essa pessoa mais valoriza?",
                 "maxLength": 100,
@@ -617,7 +658,7 @@
             {
                 "hint": "Selecione uma faixa de valor",
                 "id": 12,
-                "isClearable": false,
+                "isCreatable": false,
                 "isMulti": false,
                 "label": "Qual é o seu orçamento para esse presente?",
                 "maxLength": 0,

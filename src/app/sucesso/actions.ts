@@ -10,6 +10,7 @@ import { revalidatePath } from 'next/cache'
 import { headers } from 'next/headers'
 import OpenAI, { ClientOptions } from 'openai'
 import { v7 as uuidv7, validate as uuidValidate } from 'uuid'
+import wait from 'wait'
 import { FREE_RESPONSE_TEMPLATE, PAID_RESPONSE_TEMPLATE } from './constants'
 
 const clientOptions: ClientOptions = { apiKey: process.env.OPENAI_API_KEY }
@@ -121,7 +122,12 @@ export async function generatePdf(paymentId: string) {
 
         const fileUrl = await getDownloadURL(fileRef)
 
-        await paymentDocument.update({ pdfUrl: fileUrl, updatedAt: new Date() })
+        const { writeTime } = await paymentDocument.update({
+            pdfUrl: fileUrl,
+            updatedAt: new Date()
+        })
+
+        await wait((new Date).getTime() - writeTime.toMillis() + 5000)
 
         revalidatePath(origin)
 
