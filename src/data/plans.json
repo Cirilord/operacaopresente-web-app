@@ -319,70 +319,165 @@
                 "type": "input"
             },
             {
-                "hint": "",
+                "hint": "Matrix, O Poderoso Chefão, Vingadores: Ultimato, etc...",
                 "id": 2,
                 "isClearable": false,
                 "isMulti": false,
                 "label": "Quais filmes ela assiste?",
                 "maxLength": 100,
                 "options": [],
-                "placeholder": "",
+                "placeholder": "Digite uma ou mais opções",
                 "type": "input"
             },
             {
-                "hint": "",
+                "hint": "Bohemian Rhapsody, Garota de Ipanema, Blinding Lights, etc...",
                 "id": 3,
                 "isClearable": false,
                 "isMulti": false,
                 "label": "Qual o estilo musical ela mais gosta?",
                 "maxLength": 100,
                 "options": [],
-                "placeholder": "",
+                "placeholder": "Digite uma ou mais opções",
                 "type": "input"
             },
             {
-                "hint": "Exemplo: coleciona itens específicos",
+                "hint": "Coleciona itens específicos, etc...",
                 "id": 4,
                 "isClearable": false,
                 "isMulti": false,
                 "label": "Quais manias essa pessoa tem?",
                 "maxLength": 100,
                 "options": [],
-                "placeholder": "",
+                "placeholder": "Digite uma ou mais opções",
                 "type": "input"
             },
             {
-                "hint": "Moderno, clássico, romântico, etc...",
+                "hint": "Moderno, Clássico, Romântico, etc...",
                 "id": 5,
-                "isClearable": false,
+                "isClearable": true,
                 "isMulti": false,
-                "label": "Qual é o estilo pessoal?",
-                "maxLength": 100,
-                "options": [],
-                "placeholder": "",
-                "type": "input"
+                "label": "Qual o estilo dessa pessoa?",
+                "maxLength": 0,
+                "options": [
+                    {
+                        "label": "Alternativo",
+                        "value": "Alternativo"
+                    },
+                    {
+                        "label": "Artístico",
+                        "value": "Artístico"
+                    },
+                    {
+                        "label": "Aventureiro",
+                        "value": "Aventureiro"
+                    },
+                    {
+                        "label": "Clássico",
+                        "value": "Clássico"
+                    },
+                    {
+                        "label": "Contemporâneo",
+                        "value": "Contemporâneo"
+                    },
+                    {
+                        "label": "Moderno",
+                        "value": "Moderno"
+                    },
+                    {
+                        "label": "Romântico",
+                        "value": "Romântico"
+                    },
+                    {
+                        "label": "Rústico",
+                        "value": "Rústico"
+                    },
+                    {
+                        "label": "Vintage",
+                        "value": "Vintage"
+                    }
+                ],
+                "placeholder": "Digite ou escolha uma opção",
+                "type": "select"
             },
             {
-                "hint": "",
+                "hint": "Vermelho, azul, verde, etc...",
                 "id": 6,
                 "isClearable": false,
                 "isMulti": false,
-                "label": "Qual a cor favorita?",
-                "maxLength": 100,
-                "options": [],
-                "placeholder": "",
-                "type": "input"
+                "label": "Qual a cor favorita dessa pessoa?",
+                "maxLength": 0,
+                "options": [
+                    {
+                        "label": "Vermelho",
+                        "value": "Vermelho"
+                    },
+                    {
+                        "label": "Azul",
+                        "value": "Azul"
+                    },
+                    {
+                        "label": "Verde",
+                        "value": "Verde"
+                    },
+                    {
+                        "label": "Amarelo",
+                        "value": "Amarelo"
+                    },
+                    {
+                        "label": "Laranja",
+                        "value": "Laranja"
+                    },
+                    {
+                        "label": "Roxo",
+                        "value": "Roxo"
+                    },
+                    {
+                        "label": "Rosa",
+                        "value": "Rosa"
+                    },
+                    {
+                        "label": "Marrom",
+                        "value": "Marrom"
+                    },
+                    {
+                        "label": "Cinza",
+                        "value": "Cinza"
+                    },
+                    {
+                        "label": "Preto",
+                        "value": "Preto"
+                    }
+                ],
+                "placeholder": "Escolha uma opção",
+                "type": "select"
             },
             {
-                "hint": "Amigo, namorado, parente, etc...",
+                "hint": "Amigo, Namorado, Parente, etc...",
                 "id": 7,
                 "isClearable": false,
                 "isMulti": false,
                 "label": "O que essa pessoa é sua?",
-                "maxLength": 100,
-                "options": [],
-                "placeholder": "",
-                "type": "input"
+                "maxLength": 0,
+                "options": [
+                    {
+                        "label": "Amigo(a)",
+                        "value": "Amigo(a)"
+                    },
+                    {
+                        "label": "Namorado(a)",
+                        "value": "Namorado(a)"
+                    },
+                    {
+                        "label": "Parente",
+                        "value": "Parente"
+                    },
+                    {
+                        "label": "Conhecido",
+                        "value": "Conhecido"
+                    }
+                ],
+                "placeholder": "Escolha uma opção",
+                "type": "select"
             },
             {
                 "hint": "",
@@ -390,54 +485,166 @@
                 "isClearable": false,
                 "isMulti": false,
                 "label": "Ela mencionou recentemente algo que precisava?",
-                "maxLength": 100,
-                "options": [],
-                "placeholder": "",
-                "type": "input"
+                "maxLength": 0,
+                "options": [
+                    {
+                        "label": "Sim",
+                        "value": "Sim"
+                    },
+                    {
+                        "label": "Não",
+                        "value": "Não"
+                    }
+                ],
+                "placeholder": "Escolha uma opção",
+                "type": "select"
             },
             {
-                "hint": "",
+                "hint": "Idade da pessoa",
                 "id": 9,
                 "isClearable": false,
                 "isMulti": false,
-                "label": "Qual a faixa etária dela?",
-                "maxLength": 100,
-                "options": [],
-                "placeholder": "",
-                "type": "input"
+                "label": "Qual a faixa etária?",
+                "maxLength": 0,
+                "options": [
+                    {
+                        "label": "0-5 anos",
+                        "value": "0-5 anos"
+                    },
+                    {
+                        "label": "6-12 anos",
+                        "value": "6-12 anos"
+                    },
+                    {
+                        "label": "13-17 anos",
+                        "value": "13-17 anos"
+                    },
+                    {
+                        "label": "18-24 anos",
+                        "value": "18-24 anos"
+                    },
+                    {
+                        "label": "25-30 anos",
+                        "value": "25-30 anos"
+                    },
+                    {
+                        "label": "31-40 anos",
+                        "value": "31-40 anos"
+                    },
+                    {
+                        "label": "41-50 anos",
+                        "value": "41-50 anos"
+                    },
+                    {
+                        "label": "51-60 anos",
+                        "value": "51-60 anos"
+                    },
+                    {
+                        "label": "61 anos ou mais",
+                        "value": "61 anos ou mais"
+                    }
+                ],
+                "placeholder": "Escolha uma opção",
+                "type": "select"
             },
             {
-                "hint": "Aniversário, Aniversário de namoro, Natal, etc...",
+                "hint": "Aniversário, Natal, Casamento, etc...",
                 "id": 10,
                 "isClearable": false,
                 "isMulti": false,
                 "label": "Qual é a ocasião para o presente?",
-                "maxLength": 100,
-                "options": [],
-                "placeholder": "",
-                "type": "input"
+                "maxLength": 0,
+                "options": [
+                    {
+                        "value": "Aniversário",
+                        "label": "Aniversário"
+                    },
+                    {
+                        "value": "Dia dos Namorados",
+                        "label": "Dia dos Namorados"
+                    },
+                    {
+                        "value": "Natal",
+                        "label": "Natal"
+                    },
+                    {
+                        "value": "Dia das Mães",
+                        "label": "Dia das Mães"
+                    },
+                    {
+                        "value": "Dia dos Pais",
+                        "label": "Dia dos Pais"
+                    },
+                    {
+                        "value": "Casamento",
+                        "label": "Casamento"
+                    },
+                    {
+                        "value": "Chá de Bebê",
+                        "label": "Chá de Bebê"
+                    },
+                    {
+                        "value": "Formatura",
+                        "label": "Formatura"
+                    },
+                    {
+                        "value": "Lembrancinha de Viagem",
+                        "label": "Lembrancinha de Viagem"
+                    },
+                    {
+                        "value": "Aniversário de Casamento",
+                        "label": "Aniversário de Casamento"
+                    },
+                    {
+                        "value": "Outras",
+                        "label": "Outras"
+                    }
+                ],
+                "placeholder": "Escolha uma opção",
+                "type": "select"
             },
             {
-                "hint": "experiências, objetivos, personalização, etc...",
+                "hint": "Experiências, Objetos, Personalização, etc...",
                 "id": 11,
                 "isClearable": false,
                 "isMulti": false,
-                "label": "O que essa pessoa valoriza mais?",
+                "label": "O que essa pessoa mais valoriza?",
                 "maxLength": 100,
                 "options": [],
-                "placeholder": "",
+                "placeholder": "Digite uma ou mais opções",
                 "type": "input"
             },
             {
-                "hint": "",
+                "hint": "Selecione uma faixa de valor",
                 "id": 12,
                 "isClearable": false,
                 "isMulti": false,
                 "label": "Qual é o seu orçamento para esse presente?",
-                "maxLength": 100,
-                "options": [],
-                "placeholder": "",
-                "type": "input"
+                "maxLength": 0,
+                "options": [
+                    {
+                        "label": "Até R$50",
+                        "value": "Até R$50"
+                    },
+                    {
+                        "label": "R$51 - R$100",
+                        "value": "R$51 - R$100"
+                    },
+                    {
+                        "label": "R$101 - R$200",
+                        "value": "R$101 - R$200"
+                    },
+                    {
+                        "label": "R$201 - R$300",
+                        "value": "R$201 - R$300"
+                    },
+                    {
+                        "label": "Acima de R$300",
+                        "value": "Acima de R$300"
+                    }
+                ],
+                "placeholder": "Escolha uma opção",
+                "type": "select"
             }
         ],
         "id": 3,
