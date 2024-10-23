@@ -17,7 +17,7 @@ export const PlanSchema = z.object({
     if (type === 'simple' && responses.length > 7) {
         return false
     }
-    if (type === 'advanced' && responses.length > 10) {
+    if (type === 'advanced' && responses.length > 12) {
         return false
     }
 
