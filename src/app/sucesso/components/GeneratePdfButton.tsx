@@ -1,7 +1,8 @@
 'use client'
-import { Button } from '@chakra-ui/react'
-import { generatePdf } from '../actions'
+import { Button, useToast, UseToastOptions } from '@chakra-ui/react'
 import { useState } from 'react'
+import { t } from 'tuple-it'
+import { generatePdf } from '../actions'
 
 export type GeneratePdfButtonProps = {
     paymentId: string
@@ -11,11 +12,29 @@ export default function GeneratePdfButton(props: GeneratePdfButtonProps) {
 
     const { paymentId } = props
         , [isLoading, setIsLoading] = useState(false)
+        , toast = useToast({ duration: 3000, position: 'top-right' })
 
     const onGeneratePdf = async () => {
+
+        const toastOptions: UseToastOptions = {}
+
         setIsLoading(true)
-        await generatePdf(paymentId)
-        setIsLoading(false)
+
+        const [error, response] = await t(generatePdf(paymentId))
+
+        if (error || response.error) {
+
+            toastOptions.status = 'error'
+            toastOptions.description = 'Erro ao gerar dossiê!'
+
+            setIsLoading(false)
+        }
+        else {
+            toastOptions.status = 'success'
+            toastOptions.description = 'Dossiê gerado com sucesso!'
+        }
+
+        toast(toastOptions)
     }
 
     return (
