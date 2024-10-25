@@ -7,12 +7,28 @@ export interface RootLayoutProps {
     children: ReactNode
 }
 
+const description = 'Surpreenda a pessoa amada com um presente certeiro, de acordo com os gostos dela. Não tem como dar errado!'
+    , imageCard = '/static/card.png'
+    , title = 'Operação Presente'
+
 export const metadata: Metadata = {
-    description: 'Surpreenda a pessoa amada com um presente certeiro, de acordo com os gostos dela. Não tem como dar errado!',
+    description,
     icons: {
         icon: '/favicon.ico',
     },
-    title: 'Operação Presente'
+    openGraph: {
+        images: [imageCard],
+        description,
+        title,
+        type: 'website'
+    },
+    title,
+    twitter: {
+        card: 'summary_large_image',
+        description,
+        images: [imageCard],
+        title
+    }
 }
 
 export default async function RootLayout(props: RootLayoutProps) {
