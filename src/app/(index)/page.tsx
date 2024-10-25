@@ -215,11 +215,12 @@ export default function HomePage() {
                                         boxShadow='md'
                                         color='#ffffff'
                                         key={item.title}
+                                        maxWidth='236px'
                                         paddingX={4}
                                         paddingY={6}
                                         textAlign='center'
-                                        userSelect='none'
-                                        transition='all 0.2s ease'>
+                                        transition='all 0.2s ease'
+                                        userSelect='none'>
                                         <Icon as={item.icon} color='#ffffff' boxSize={12} marginBottom={4} />
                                         <Text
                                             color='#ffffff'
