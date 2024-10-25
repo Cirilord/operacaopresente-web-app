@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { ReactNode } from 'react'
 import { Providers } from './providers'
+import Script from 'next/script'
 
 export interface RootLayoutProps {
     children: ReactNode
@@ -20,6 +21,18 @@ export default async function RootLayout(props: RootLayoutProps) {
 
     return (
         <html data-theme='light' lang='en'>
+            <head>
+                <Script async src='https://www.googletagmanager.com/gtag/js?id=G-B4EEC39G7S' />
+                <Script id='google-analytics'>
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+
+                        gtag('config', 'G-B4EEC39G7S');
+                    `}
+                </Script>
+            </head>
             <body>
                 <Providers>
                     {children}
