@@ -8,7 +8,7 @@ export interface RootLayoutProps {
 }
 
 const description = 'Surpreenda a pessoa amada com um presente certeiro, de acordo com os gostos dela. Não tem como dar errado!'
-    , imageCard = '/static/card.png'
+    , imageCard = 'https://www.operacaopresente.com/static/card.png'
     , title = 'Operação Presente'
 
 export const metadata: Metadata = {
