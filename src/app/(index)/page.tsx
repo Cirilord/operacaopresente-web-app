@@ -38,6 +38,7 @@ import { Fragment, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TbChecklist, TbFileDescription, TbHeartFilled, TbPigMoney } from 'react-icons/tb'
 import { generatePayment } from './actions'
+import ContactForm from './components/ContactForm'
 import { PlanSchema } from './schemas'
 import { Plan } from './types'
 
@@ -479,6 +480,31 @@ export default function HomePage() {
                                 ))
                             }
                         </Accordion>
+                    </Stack>
+                </Container>
+            </Box>
+            <Box as='section' backgroundColor='#6B3FA0' id='contato' width='full'>
+                <Container maxWidth='container.lg' paddingY={[12, 20, 28]}>
+                    <Stack alignItems='center' spacing={0}>
+                        <Text
+                            as='h2'
+                            color='#ffffff'
+                            fontSize={{ base: '22px', sm: '30px', md: '48px', lg: '56px' }}
+                            fontWeight='700'
+                            textAlign='center'>
+                            Contato
+                        </Text>
+                        <Text
+                            color='#ffffff'
+                            fontSize={{ base: '14px', lg: '16px' }}
+                            lineHeight='1.75'
+                            marginTop={4}
+                            textAlign='center'>
+                            Estamos aqui para ouvir você! Se tiver dúvidas ou sugestões, não hesite em nos contatar.
+                            <Box as='br' display={{ base: 'none', md: 'unset' }} />
+                            Preencha o formulário abaixo ou use nossos canais de comunicação. Sua opinião é importante para nós!
+                        </Text>
+                        <ContactForm />
                     </Stack>
                 </Container>
             </Box>

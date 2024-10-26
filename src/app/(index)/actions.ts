@@ -1,13 +1,76 @@
 'use server'
 import { db } from '@/lib/firebaseConfig'
+import { ConfidentialClientApplication } from '@azure/msal-node'
+import { Client } from '@microsoft/microsoft-graph-client'
+import Handlebars from 'handlebars'
 import { headers } from 'next/headers'
 import { redirect, RedirectType } from 'next/navigation'
 import { Stripe } from 'stripe'
+import { t } from 'tuple-it'
 import { v7 as uuidv7 } from 'uuid'
-import { PlanSchema } from './schemas'
-import { Plan } from './types'
+import { CONTACT_TEMPLATE } from './constants'
+import { ContactSchema, PlanSchema } from './schemas'
+import { Contact, Plan } from './types'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
+
+const app = new ConfidentialClientApplication({
+    auth: {
+        authority: `https://login.microsoftonline.com/${process.env.AZURE_TENANT_ID!}`,
+        clientId: process.env.AZURE_CLIENT_ID!,
+        clientSecret: process.env.AZURE_CLIENT_SECRET!,
+    }
+})
+
+export async function sendEmail(contactUnparsed: Contact) {
+
+    const contactParsed = ContactSchema.safeParse(contactUnparsed)
+
+    if (!contactParsed.success) {
+        return { error: {}, success: false } as const
+    }
+
+    const [authenticationResultError, authenticationResult] =
+        await t(app.acquireTokenByClientCredential({ scopes: ['https://graph.microsoft.com/.default'] }))
+
+    if (authenticationResultError || !authenticationResult) {
+        return { error: {}, success: false } as const
+    }
+
+    const { accessToken } = authenticationResult
+        , client = Client.init({ authProvider: (done) => { done(null, accessToken) } })
+        , contact = contactParsed.data
+        , template = Handlebars.compile(CONTACT_TEMPLATE)
+        , content = template({ email: contact.email, message: contact.message, name: contact.name })
+
+    const email = {
+        message: {
+            body: {
+                content,
+                contentType: 'HTML'
+            },
+            subject: 'Tentativa de contato',
+            toRecipients: [
+                {
+                    emailAddress: {
+                        address: 'contato@operacaopresente.com'
+                    }
+                }
+            ]
+        },
+        saveToSentItems: 'false'
+    }
+
+    const [responseError] = await t(client.api('/users/contato@operacaopresente.com/sendMail')
+        .header('Content-type', 'application/json')
+        .post(email))
+
+    if (responseError) {
+        return { error: {}, success: false } as const
+    }
+
+    return { data: null, success: true } as const
+}
 
 export async function generatePayment(planUnparsed: Plan) {
 

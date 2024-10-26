@@ -1,5 +1,7 @@
 import { z } from 'zod'
-import { PlanSchema, PlansSchema, ResponseSchema } from '../schemas'
+import { ContactSchema, PlanSchema, PlansSchema, ResponseSchema } from '../schemas'
+
+export type Contact = z.infer<typeof ContactSchema>
 
 export type Plan = z.infer<typeof PlanSchema>
 

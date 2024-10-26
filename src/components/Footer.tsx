@@ -8,12 +8,12 @@ export default function Footer(props: FooterProps) {
     const { } = props
 
     return (
-        <Box as='section' backgroundColor='#6B3FA0' id='encontre-o-presente-ideal' width='full'>
+        <Box as='section' backgroundColor='#FFF8E1' id='encontre-o-presente-ideal' width='full'>
             <Container display='flex' justifyContent='center' maxWidth='container.xl' paddingY={4}>
-                {/* <Text as='span' color='#ffffff' fontSize='sm'>
+                {/* <Text as='span' color='#512E5F' fontSize='sm'>
                     Copyright{' '}©{' '}{(new Date).getFullYear()}
                 </Text> */}
-                <Text as='span' color='#ffffff' fontSize='sm'>
+                <Text as='span' color='#512E5F' fontSize='sm' fontWeight='500'>
                     <Link href='/termos-de-uso' target='_blank'>
                         Termos de uso
                     </Link>

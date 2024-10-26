@@ -1,5 +1,11 @@
 import { z } from 'zod'
 
+export const ContactSchema = z.object({
+    email: z.string().email(),
+    message: z.string().min(1).max(255),
+    name: z.string().min(1).max(100)
+})
+
 export const ResponseSchema = z.object({
     answer: z.union([z.string().min(1), z.array(z.string().min(1)).min(1)]),
     question: z.string().min(1)
