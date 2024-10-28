@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { ReactNode } from 'react'
 import { Providers } from './providers'
-import Script from 'next/script'
 
-export interface RootLayoutProps {
+export type RootLayoutProps = {
     children: ReactNode
 }
 

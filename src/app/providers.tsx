@@ -3,9 +3,10 @@ import theme from '@/utils/theme'
 import { CacheProvider } from '@chakra-ui/next-js'
 import { ChakraProvider } from '@chakra-ui/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactNode } from 'react'
 
-export interface ProvidersProps {
-    children: React.ReactNode
+export type ProvidersProps = {
+    children: ReactNode
 }
 
 const queryClient = new QueryClient({
