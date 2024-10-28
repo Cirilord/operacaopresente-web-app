@@ -279,7 +279,8 @@ export default function HomePage() {
                             lineHeight='1.75'
                             marginTop={4}
                             textAlign='center'>
-                            Responda as perguntas de acordo com a pessoa que irá receber o presente.
+                            Responda as perguntas de acordo com a pessoa que irá receber o presente.{' '}
+                            <Box as='br' display={{ base: 'none', md: 'unset' }} />
                             Seja bem detalhado e nos conte tudo o que souber.
                         </Text>
                         <Tabs
