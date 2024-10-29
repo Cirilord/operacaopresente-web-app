@@ -15,6 +15,7 @@ import {
     Button,
     Center,
     Container,
+    Flex,
     FormControl,
     FormHelperText,
     FormLabel,
@@ -311,10 +312,22 @@ export default function HomePage() {
                                                 position: 'absolute',
                                                 width: '3px'
                                             }}
+                                            _selected={{
+                                                '.indicator': {
+                                                    background: '#FFF8E1',
+                                                    borderRadius: '64px',
+                                                    height: '40px',
+                                                    position: 'absolute',
+                                                    width: '145px',
+                                                    zIndex: 0
+                                                },
+                                                color: '#512E5F'
+                                            }}
                                             key={plan.id}
                                             padding={4}
                                             position='relative'>
-                                            <Text as='span' fontWeight='600'>
+                                            <Flex className='indicator' />
+                                            <Text as='span' fontWeight='600' zIndex={1}>
                                                 {plan.name}
                                             </Text>
                                         </Tab>

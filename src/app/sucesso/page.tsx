@@ -51,7 +51,11 @@ export default async function SuccessPage(props: SuccessPageProps) {
                                     fontSize={{ base: '22px', sm: '30px', md: '48px', lg: '56px' }}
                                     fontWeight='700'
                                     textAlign='center'>
-                                    Dossiê Gerado com Sucesso!
+                                    {
+                                        payment.pdfUrl
+                                            ? 'Dossiê Gerado com Sucesso!'
+                                            : 'Perguntas respondidas com Sucesso!'
+                                    }
                                 </Text>
                                 <Text
                                     color='#ffffff'
@@ -60,7 +64,7 @@ export default async function SuccessPage(props: SuccessPageProps) {
                                     marginTop={4}
                                     maxWidth='900px'
                                     textAlign='center'>
-                                    Obrigado!<br />
+                                    Obrigado!<Box as='br' />
                                     {
                                         payment.pdfUrl
                                             ? 'Seu dossiê personalizado de presentes está pronto para download.'
@@ -83,13 +87,25 @@ export default async function SuccessPage(props: SuccessPageProps) {
                                 <Text
                                     as='h2'
                                     color='#ffffff'
-                                    fontSize={['36px', '48px', '56px']}
-                                    fontWeight='700'>
-                                    Dossiê Gerado com Sucesso!
+                                    fontSize={{ base: '22px', sm: '30px', md: '48px', lg: '56px' }}
+                                    fontWeight='700'
+                                    textAlign='center'>
+                                    {
+                                        payment.pdfUrl
+                                            ? 'Dossiê Gerado com Sucesso!'
+                                            : 'Pagamento realizado com Sucesso!'
+                                    }
                                 </Text>
-                                <Text color='#ffffff' fontSize='16px' lineHeight='1.75' marginTop={4} maxWidth='900px' textAlign='center'>
+                                <Text
+                                    color='#ffffff'
+                                    fontSize={{ base: '14px', lg: '16px' }}
+                                    lineHeight='1.75'
+                                    marginTop={4}
+                                    maxWidth='900px'
+                                    textAlign='center'>
                                     Obrigado, {session.customer_details?.name}! Seu pagamento de R$ {(session.amount_total || 0) / 100} foi
-                                    confirmado com sucesso.<br />
+                                    confirmado com sucesso.{' '}
+                                    <Box as='br' display={{ base: 'none', md: 'unset' }} />
                                     {
                                         payment.pdfUrl
                                             ? 'Seu dossiê personalizado de presentes está pronto para download.'
@@ -112,11 +128,18 @@ export default async function SuccessPage(props: SuccessPageProps) {
                                 <Text
                                     as='h2'
                                     color='#ffffff'
-                                    fontSize={['36px', '48px', '56px']}
-                                    fontWeight='700'>
+                                    fontSize={{ base: '22px', sm: '30px', md: '48px', lg: '56px' }}
+                                    fontWeight='700'
+                                    textAlign='center'>
                                     Aguardando Pagamento!
                                 </Text>
-                                <Text color='#ffffff' fontSize='16px' lineHeight='1.75' marginTop={4} maxWidth='900px' textAlign='center'>
+                                <Text
+                                    color='#ffffff'
+                                    fontSize={{ base: '14px', lg: '16px' }}
+                                    lineHeight='1.75'
+                                    marginTop={4}
+                                    maxWidth='900px'
+                                    textAlign='center'>
                                     Obrigado, {session.customer_details?.name}! Recebemos sua solicitação de pagamento no valor de R$ {(session.amount_total || 0) / 100}.
                                     Assim que o pagamento for confirmado, o seu dossiê será gerado e você
                                     poderá baixá-lo no link atual. Isso pode levar até 2 dias úteis.
