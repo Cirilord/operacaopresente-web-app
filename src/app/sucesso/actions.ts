@@ -129,7 +129,7 @@ export async function generatePdf(paymentId: string) {
 
         await wait((new Date).getTime() - writeTime.toMillis() + 5000)
 
-        revalidatePath(origin)
+        revalidatePath(`${origin}/sucesso?paymentId=${paymentId}`)
 
         return { data: null, success: true } as const
     }
