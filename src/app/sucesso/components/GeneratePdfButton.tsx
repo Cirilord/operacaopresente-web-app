@@ -22,12 +22,12 @@ export default function GeneratePdfButton(props: GeneratePdfButtonProps) {
 
         const [error, response] = await t(generatePdf(paymentId))
 
+        setIsLoading(false)
+
         if (error || response.error) {
 
             toastOptions.status = 'error'
             toastOptions.description = 'Erro ao gerar dossiê!'
-
-            setIsLoading(false)
         }
         else {
             toastOptions.status = 'success'
