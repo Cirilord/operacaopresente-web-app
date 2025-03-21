@@ -12,6 +12,7 @@ export const ResponseSchema = z.object({
 })
 
 export const PlanSchema = z.object({
+    price: z.number().nullable(),
     responses: z.array(ResponseSchema),
     type: z.enum(['advanced', 'free', 'simple'])
 }).refine((data) => {

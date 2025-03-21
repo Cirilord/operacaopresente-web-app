@@ -11,8 +11,7 @@ import { v7 as uuidv7 } from 'uuid'
 import { CONTACT_TEMPLATE } from './constants'
 import { ContactSchema, PlanSchema } from './schemas'
 import { Contact, Plan } from './types'
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
+import { MercadoPagoConfig, Payment, Preference, PaymentMethod } from 'mercadopago'
 
 const app = new ConfidentialClientApplication({
     auth: {
@@ -21,6 +20,26 @@ const app = new ConfidentialClientApplication({
         clientSecret: process.env.AZURE_CLIENT_SECRET!,
     }
 })
+
+// const mercadoPago = new MercadoPagoConfig({
+//     accessToken: '',
+//     options: {
+//         idempotencyKey: 'abc',
+//         timeout: 5000
+//     }
+// })
+
+const preference = new Preference(
+    new MercadoPagoConfig({
+        accessToken: '',
+        options: {
+            idempotencyKey: 'abc',
+            timeout: 5000
+        }
+    })
+)
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 export async function sendEmail(contactUnparsed: Contact) {
 
@@ -80,6 +99,33 @@ export async function generatePayment(planUnparsed: Plan) {
         return { error: {}, success: false } as const
     }
 
+    const a = await preference.create({
+        body: {
+            // back_urls: {
+            //     success: `${redirectUrl}/sucesso?paymentId=${paymentId}`
+            // },
+            payment_methods: {
+                excluded_payment_methods: [{ id: 'pec' }],
+                // excluded_payment_methods: [{ id: }],
+                installments: 1
+            },
+            items: [
+                {
+
+                    id: uuidv7(),
+                    picture_url: 'https://www.operacaopresente.com/static/10613008_10070_rect.svg',
+                    quantity: 1,
+                    title: planParsed.data.type === 'advanced' ? 'Dossiê Avançado' : 'Dossiê Simples',
+                    unit_price: planParsed.data.price || 0
+                }
+            ]
+        }
+    })
+
+    debugger
+
+    console.log(a)
+
     const { responses, type: planType } = planParsed.data
 
     const defaultPayment = {
@@ -87,6 +133,7 @@ export async function generatePayment(planUnparsed: Plan) {
         data: [],
         pdfUrl: null,
         planType,
+        preferenceId: null as string | null,
         responses,
         stripeId: null as string | null,
         updatedAt: null
@@ -101,28 +148,62 @@ export async function generatePayment(planUnparsed: Plan) {
             const readonlyHeaders = headers()
                 , redirectUrl = readonlyHeaders.get('origin') || ''
 
-            const session = await stripe.checkout.sessions.create({
-                cancel_url: redirectUrl,
-                line_items: [
-                    {
-                        price: 'price_1Q4uo0P7kMTPqIlVPRV9hUHr',
-                        quantity: 1
-                    }
-                ],
-                locale: 'pt-BR',
-                metadata: { paymentId },
-                mode: 'payment',
-                success_url: `${redirectUrl}/sucesso?paymentId=${paymentId}`
+            const preferenceResponse = await preference.create({
+                body: {
+                    auto_return: 'approved',
+                    back_urls: {
+                        success: `${redirectUrl}/sucesso?paymentId=${paymentId}`
+                    },
+                    expires: false,
+                    payment_methods: {
+                        excluded_payment_methods: [{ id: 'pec' }],
+                        installments: 1
+                    },
+                    items: [
+                        {
+                            id: uuidv7(),
+                            picture_url: 'https://www.operacaopresente.com/static/10613008_10070_rect.svg',
+                            quantity: 1,
+                            title: planType === 'advanced' ? 'Dossiê Avançado' : 'Dossiê Simples',
+                            unit_price: planParsed.data.price || 0
+                        }
+                    ]
+                }
             })
 
-            if (session.id && session.url) {
+            if (preferenceResponse.id && preferenceResponse.sandbox_init_point) {
 
-                defaultPayment.stripeId = session.id
+                // defaultPayment.stripeId = preferenceResponse.id
+
+                defaultPayment.preferenceId = preferenceResponse.id
 
                 await db.collection('payments').doc(paymentId).set(defaultPayment)
 
-                return redirect(session.url, RedirectType.push)
+                return redirect(preferenceResponse.sandbox_init_point, RedirectType.push)
             }
+
+            // const session = await stripe.checkout.sessions.create({
+            //     cancel_url: redirectUrl,
+            //     line_items: [
+            //         {
+            //             price: 'price_1Q4uo0P7kMTPqIlVPRV9hUHr',
+            //             quantity: 1
+            //         }
+            //     ],
+            //     locale: 'pt-BR',
+            //     metadata: { paymentId },
+            //     mode: 'payment',
+            //     success_url: `${redirectUrl}/sucesso?paymentId=${paymentId}`
+            // })
+
+            // if (session.id && session.url) {
+
+            //     defaultPayment.stripeId = session.id
+
+            //     await db.collection('payments').doc(paymentId).set(defaultPayment)
+
+            //     return redirect(session.url, RedirectType.push)
+            // }
         }
         case 'free': {
 

@@ -8,6 +8,7 @@ import { validate as uuidValidate } from 'uuid'
 import CopyLinkButton from './components/CopyLinkButton'
 import DownloadPdfButton from './components/DownloadPdfButton'
 import GeneratePdfButton from './components/GeneratePdfButton'
+import { MercadoPagoConfig, Payment, Preference } from 'mercadopago'
 
 export type SuccessPageProps = {
     searchParams: {
@@ -32,6 +33,30 @@ export default async function SuccessPage(props: SuccessPageProps) {
     if (!(paymentDocumentData.exists && payment)) {
         return redirect('/')
     }
+
+    const preference = new Preference(
+        new MercadoPagoConfig({
+            accessToken: '',
+            options: {
+                idempotencyKey: 'abc',
+                timeout: 5000
+            }
+        })
+    )
+
+    const preferenceResponse = await preference.get({
+        preferenceId: payment.preferenceId
+    })
+
+    const paymenta = await (new Payment(
+        new MercadoPagoConfig({
+            accessToken: ''
+        })
+    )).search()
+
+    debugger
+
+    console.log(preferenceResponse)
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
         , session = payment.planType === 'free' ? null : await stripe.checkout.sessions.retrieve(payment.stripeId)

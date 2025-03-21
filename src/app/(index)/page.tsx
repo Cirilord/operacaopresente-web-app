@@ -13,6 +13,7 @@ import {
     AccordionPanel,
     Box,
     Button,
+    ButtonGroup,
     Center,
     Container,
     Flex,
@@ -42,14 +43,17 @@ import { generatePayment } from './actions'
 import ContactForm from './components/ContactForm'
 import { PlanSchema } from './schemas'
 import { Plan } from './types'
+import { MdCreditCard, MdPix } from 'react-icons/md'
 
 export default function HomePage() {
 
     const [planIndex, setPlanIndex] = useState(1)
+        , [paymentMethod, setPaymentMethod] = useState('card' as 'card' | 'pix')
 
     const formMethods = useForm({
         resolver: zodResolver(PlanSchema),
         values: {
+            price: plans[planIndex].price,
             responses: plans[planIndex].fields.map(({ label, type }) => ({
                 answer: type === 'input' ? '' : ([] as string[]),
                 question: label
@@ -409,6 +413,39 @@ export default function HomePage() {
                                 flexDirection='column'
                                 gap={3}
                                 paddingY='20px'>
+                                {
+                                    plans[planIndex].price &&
+                                    <ButtonGroup isAttached={true} size='lg'>
+                                        {
+                                            ([
+                                                {
+                                                    MdIcon: MdCreditCard,
+                                                    type: 'card'
+                                                },
+                                                {
+                                                    MdIcon: MdPix,
+                                                    type: 'pix'
+                                                }
+                                            ] as const).map(({ MdIcon, type }) =>
+                                                <Button
+                                                    _active={{
+                                                        backgroundColor: '#ff5959'
+                                                    }}
+                                                    _hover={{
+                                                        boxShadow: 'lg',
+                                                        transform: 'scale(1.05)'
+                                                    }}
+                                                    boxShadow='md !important'
+                                                    backgroundColor={paymentMethod === type ? '#FFF8E1' : '#FF6B6B'}
+                                                    color={paymentMethod === type ? '#512E5F' : '#ffffff'}
+                                                    key={type}
+                                                    onClick={() => setPaymentMethod(type)}>
+                                                    <Icon as={MdIcon} boxSize={6} />
+                                                </Button>
+                                            )
+                                        }
+                                    </ButtonGroup>
+                                }
                                 <Button
                                     _active={{
                                         backgroundColor: '#ff5959'
